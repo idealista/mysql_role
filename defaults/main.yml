@@ -1,0 +1,66 @@
+---
+mysql_root_user: root
+mysql_root_password: vagrant
+
+mysql_packages:
+  - mysql-common
+  - mysql-server
+
+mysql_config_file: /etc/mysql/my.conf
+mysql_socket: /var/run/mysqld/mysqld.sock
+
+# MySQL connection settings.
+mysql_port: "3306"
+mysql_bind_address: '0.0.0.0'
+mysql_datadir: /var/lib/mysql
+mysql_pid_file: /var/run/mysqld/mysqld.pid
+
+# Slow query log settings.
+mysql_slow_query_log_file: /var/log/mysql/mysql-slow.log
+mysql_slow_query_time: 2
+
+# Memory settings (default values optimized ~512MB RAM).
+mysql_key_buffer_size: "256M"
+mysql_max_allowed_packet: "64M"
+mysql_table_open_cache: "256"
+mysql_sort_buffer_size: "1M"
+mysql_read_buffer_size: "1M"
+mysql_read_rnd_buffer_size: "4M"
+mysql_myisam_sort_buffer_size: "64M"
+mysql_thread_cache_size: "8"
+mysql_query_cache_size: "16M"
+mysql_max_connections: 151
+
+# Other settings.
+mysql_wait_timeout: 28800
+
+# InnoDB settings.
+# Set .._buffer_pool_size up to 80% of RAM but beware of setting too high.
+mysql_innodb_file_per_table: "1"
+mysql_innodb_buffer_pool_size: "256M"
+# Set .._log_file_size to 25% of buffer pool size.
+mysql_innodb_log_file_size: "64M"
+mysql_innodb_log_buffer_size: "8M"
+mysql_innodb_flush_log_at_trx_commit: "1"
+mysql_innodb_lock_wait_timeout: 50
+
+# mysqldump settings.
+mysql_mysqldump_max_allowed_packet: "64M"
+
+# Logging settings.
+mysql_log: /var/log/mysql/mysql.log
+mysql_log_error: /var/log/mysql/mysql.err
+mysql_syslog_tag: mysql
+
+# Databases.
+mysql_databases: []
+#   - name: example
+#     collation: utf8_general_ci
+#     encoding: utf8
+
+# Users.
+mysql_users: []
+#   - name: example
+#     host: 127.0.0.1
+#     password: secret
+#     priv: [ *.*:USAGE ]
