@@ -1,0 +1,9 @@
+mysql_databases:
+  - name: test01
+    encoding: utf8
+
+mysql_users:
+  - name: testing
+    password: testing
+    priv:
+      - test01.*:ALL

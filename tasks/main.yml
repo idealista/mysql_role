@@ -1,4 +1,9 @@
 ---
+- name: Install mysql repo deb
+  apt:
+    deb: "{{ mysql_deb_repo }}"
+    update_cache: yes
+
 - name: Check if mysql is already installed
   command: dpkg-query -W -f 'found' mysql-server
   changed_when: false
@@ -8,12 +13,12 @@
 - name: Ensure MySQL Python libraries are installed
   apt:
     name: python-mysqldb
-    state: present
+    state: "{{ python_libraries_version }}"
 
 - name: Ensure MySQL packages are installed
   apt:
     name: "{{ item }}"
-    state: present
+    state: "{{ mysql_version }}"
   with_items: "{{ mysql_packages }}"
 
 - name: Copy my.cnf global MySQL configuration

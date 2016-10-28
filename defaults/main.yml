@@ -1,4 +1,9 @@
 ---
+mysql_deb_repo: 'http://dev.mysql.com/get/mysql-apt-config_0.8.0-1_all.deb'
+
+python_libraries_version: latest
+mysql_version: latest
+
 mysql_root_user: root
 mysql_root_password: vagrant
 
