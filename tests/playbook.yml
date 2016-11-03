@@ -1,4 +1,32 @@
 ---
+# To test an upgrade install mysql first and set a passwd so we can use it within the playbook
+- hosts: mysqlUpgrade
+  pre_tasks:
+    - name: Check if mysql is already installed
+      command: dpkg-query -W -f 'found' mysql-server
+      changed_when: false
+      failed_when: false
+      register: installed_mysql
+      check_mode: no
+
+    - name: Install previous mysql (5.5 versions)
+      apt:
+        name: [ 'mysql-common', 'mysql-server' ]
+
+    - name: Ensure MySQL Python libraries are installed
+      apt:
+        name: python-mysqldb
+        state: present
+        install_recommends: no
+
+    - name: Ensure root password is set on first installation
+      mysql_user:
+        name: root
+        password: vagrant
+        login_user: root
+        login_host: localhost
+      when: installed_mysql.stdout != 'found'
+
 - hosts: all
   roles:
     - role: mysql-role

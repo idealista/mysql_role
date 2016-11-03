@@ -27,6 +27,6 @@ def test_mysql_conf(File, AnsibleDefaults):
 
 def test_mysql_database(Command, AnsibleDefaults):
     BD = "echo \'show databases;\'|mysql -u root -pvagrant|grep -w test01"
-    User = "echo \'show databases;\'|mysql -u testing -ptesting|grep -w testing"
+    User = "echo \'show databases;\'|mysql -u testing -ptesting|grep -w test01"
     assert Command(BD).rc is 0
     assert Command(User).rc is 0

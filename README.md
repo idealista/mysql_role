@@ -1,19 +1,21 @@
 # MySQL Role
 
-Ansible role to install mysql and create databases and users
+Ansible role to install and configure mysql and create databases and users
 
 To test it
 
 ```bash
-cd tests
-vagrant up
+molecule test
 ```
 
 To check the installation
 
 ```bash
-vagrant ssh mysql
+molecule converge
+molecule login
+
 vagrant@mysql:~$ mysql -u root -pvagrant
+
 mysql> show databases;
 +--------------------+
 | Database           |

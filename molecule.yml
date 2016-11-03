@@ -47,3 +47,10 @@ vagrant:
         - network_name: private_network
           type: dhcp
           auto_config: true
+    - name: mysqlUpgrade
+      ansible_groups:
+        - test01
+      interfaces:
+        - network_name: private_network
+          type: dhcp
+          auto_config: true

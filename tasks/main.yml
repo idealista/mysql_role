@@ -2,24 +2,32 @@
 - name: Install mysql repo deb
   apt:
     deb: "{{ mysql_deb_repo }}"
+
+- name: Update cache
+  apt:
     update_cache: yes
+  changed_when: false
 
 - name: Check if mysql is already installed
   command: dpkg-query -W -f 'found' mysql-server
+  register: installed_mysql
+  check_mode: no
+  ignore_errors: yes
   changed_when: false
   failed_when: false
-  register: installed_mysql
-
-- name: Ensure MySQL Python libraries are installed
-  apt:
-    name: python-mysqldb
-    state: "{{ python_libraries_version }}"
 
 - name: Ensure MySQL packages are installed
   apt:
     name: "{{ item }}"
     state: "{{ mysql_version }}"
   with_items: "{{ mysql_packages }}"
+  register: install_mysql
+
+- name: Ensure MySQL Python libraries are installed
+  apt:
+    name: python-mysqldb
+    state: "{{ python_libraries_version }}"
+    install_recommends: no
 
 - name: Copy my.cnf global MySQL configuration
   template:
@@ -28,7 +36,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart mysql
+    #  notify: restart mysql
 
 - name: Ensure MySQL is started and enabled on boot
   service:
@@ -38,13 +46,26 @@
 
 # This task set the initial password
 # Use mysql_user construct to change it again
-- name: Ensure root password is set the first time
+- name: Ensure root password is set on first installation
   mysql_user:
     name: "{{ mysql_root_user }}"
     password: "{{ mysql_root_password }}"
     login_user: root
     login_host: localhost
   when: installed_mysql.stdout != 'found'
+
+- name: Ensure login plugin is not socket
+  shell: >
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ mysql_root_password }}'" | mysql
+  when: installed_mysql.stdout != 'found'
+
+- name: Upgrade schemas on bd upgrades
+  command: >
+    mysql_upgrade -u {{ mysql_root_user }} -p{{ mysql_root_password }}
+  when: installed_mysql.stdout == 'found' and install_mysql.changed
+  no_log: true
+  register: upgrade
+  failed_when: "upgrade.rc != 0 and upgrade.rc != 2"
 
 - include: databases.yml
 - include: users.yml
