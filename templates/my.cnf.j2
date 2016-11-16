@@ -8,8 +8,16 @@ socket = {{ mysql_socket }}
 port = {{ mysql_port }}
 bind-address = {{ mysql_bind_address }}
 datadir = {{ mysql_datadir }}
+basedir = {{ mysql_basedir }}
+lc-messages-dir = {{ mysql_lc_messagesdir }}
 socket = {{ mysql_socket }}
 pid-file = {{ mysql_pid_file }}
+explicit_defaults_for_timestamp
+
+# * IMPORTANT: Additional settings that can override those from this file!
+#   The files must end with '.cnf', otherwise they'll be ignored.
+#
+!includedir /etc/mysql/conf.d/
 
 # Logging configuration.
 {% if mysql_log_error == 'syslog' or mysql_log == 'syslog' %}
@@ -65,3 +73,5 @@ max_allowed_packet = {{ mysql_mysqldump_max_allowed_packet }}
 
 [mysqld_safe]
 pid-file = {{ mysql_pid_file }}
+socket = {{ mysql_socket }}
+nice = 0
