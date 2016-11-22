@@ -11,7 +11,6 @@
 - name: Check if mysql is already installed
   command: dpkg-query -W -f 'found' mysql-server
   register: installed_mysql
-  check_mode: no
   ignore_errors: yes
   changed_when: false
   failed_when: false
