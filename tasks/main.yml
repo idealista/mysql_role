@@ -35,7 +35,7 @@
     owner: root
     group: root
     mode: 0644
-    #  notify: restart mysql
+  notify: restart mysql
 
 - name: Ensure MySQL is started and enabled on boot
   service:

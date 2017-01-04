@@ -15,6 +15,16 @@ molecule:
     - .vagrant
     - .molecule
 
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - idempotence
+      - verify
+      - destroy
+
   # directory to look for testinfra tests
   testinfra_dir: tests
 
