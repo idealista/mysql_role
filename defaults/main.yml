@@ -5,7 +5,7 @@ python_libraries_version: latest
 mysql_version: latest
 
 mysql_root_user: root
-mysql_root_password: vagrant
+mysql_root_password: 
 
 mysql_packages:
   - mysql-common
