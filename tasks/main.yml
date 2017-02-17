@@ -19,6 +19,7 @@
   apt:
     name: "{{ item }}"
     state: "{{ mysql_version }}"
+    allow_unauthenticated: yes
   with_items: "{{ mysql_packages }}"
   register: install_mysql
 
