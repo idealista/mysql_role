@@ -1,6 +1,15 @@
 ---
 - name: restart mysql
-  service:
+  systemd:
     name: mysql
     state: restarted
-    sleep: 5
+  when: mysql_service_state != 'stopped'
+
+- name: upgrade schemas
+  command: >
+    mysql_upgrade -u {{ mysql_root_user }} -p{{ mysql_root_password }}
+  when:
+    - "installed_mysql.stdout == 'Status: install ok installed'"
+  no_log: true
+  register: upgrade
+  failed_when: "upgrade.rc != 0 and upgrade.rc != 2"

@@ -3,7 +3,7 @@
 - hosts: mysqlUpgrade
   pre_tasks:
     - name: Check if mysql is already installed
-      command: dpkg-query -W -f 'found' mysql-server
+      shell: dpkg -s mysql-server | grep Status
       changed_when: false
       failed_when: false
       register: installed_mysql
@@ -21,10 +21,10 @@
     - name: Ensure root password is set on first installation
       mysql_user:
         name: root
-        password: vagrant
+        password: default
         login_user: root
         login_host: localhost
-      when: installed_mysql.stdout != 'found'
+      when: "installed_mysql.stdout != 'Status: install ok installed'"
 
 - hosts: all
   roles:

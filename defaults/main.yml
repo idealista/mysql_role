@@ -1,27 +1,28 @@
 ---
-mysql_deb_repo: 'http://dev.mysql.com/get/mysql-apt-config_0.8.0-1_all.deb'
+## General
+mysql_config_version: 0.8.0-1
 
-python_libraries_version: latest
-mysql_version: latest
+## Service options
+# start on boot
+mysql_service_enabled: True
+# current state: started, stopped
+mysql_service_state: started
 
 mysql_root_user: root
-mysql_root_password: 
+mysql_root_password: default
 
-mysql_packages:
-  - mysql-common
-  - mysql-server
-
+# Files & Paths
 mysql_config_file: /etc/mysql/my.conf
 mysql_socket: /var/run/mysqld/mysqld.sock
-
-# MySQL connection settings.
-mysql_port: "3306"
-mysql_bind_address: '0.0.0.0'
 mysql_datadir: /var/lib/mysql
 mysql_basedir: /usr
 mysql_tmpdir: /tmp
 mysql_lc_messagesdir: /usr/share/mysql
 mysql_pid_file: /var/run/mysqld/mysqld.pid
+
+# MySQL connection settings.
+mysql_port: 3306
+mysql_bind_address: 0.0.0.0
 
 # Slow query log settings.
 mysql_slow_query_log_file: /var/log/mysql/mysql-slow.log
