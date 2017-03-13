@@ -5,9 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a ch
 
 
 ## [Unreleased](https://github.com/idealista-tech/mysql-role/tree/develop)
+
+## [1.0.0](https://github.com/idealista-tech/mysql-role/tree/1.0.0) (13/03/2017)
 ### Fixed
 - *Certificate error downloading mysql* @jmonterrubio
 
-## [1.0.0]
+## [0.0.1]
 ### Added
 - *First release*
