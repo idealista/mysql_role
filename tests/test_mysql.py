@@ -20,13 +20,8 @@ def test_mysql_service(File, Service, Socket):
     assert Socket("tcp://127.0.0.1:3306")
 
 
-def test_mysql_conf(File, AnsibleDefaults):
-    conf = File(AnsibleDefaults["mysql_config_file"])
-    assert conf.contains('Ansible managed config')
-
-
 def test_mysql_database(Command, AnsibleDefaults):
-    BD = "echo \'show databases;\'|mysql -u root -pvagrant|grep -w test01"
+    BD = "echo \'show databases;\'|mysql -u root -pdefault|grep -w test01"
     User = "echo \'show databases;\'|mysql -u testing -ptesting|grep -w test01"
     assert Command(BD).rc is 0
     assert Command(User).rc is 0

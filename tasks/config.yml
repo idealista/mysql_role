@@ -1,0 +1,31 @@
+---
+
+- name: MYSQL | Copy global MySQL configuration
+  template:
+    src: my.cnf.j2
+    dest: "{{ mysql_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mysql
+
+- name: Ensure MySQL is started and enabled on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+# This task set the initial password
+# Use mysql_user construct to change it again
+- name: MYSQL | Set root password
+  mysql_user:
+    name: "{{ mysql_root_user }}"
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_host: localhost
+  when: "installed_mysql.stdout != 'Status: install ok installed'"
+
+#- name: Ensure login plugin is not socket
+#  shell: >
+#    echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ mysql_root_password }}'" | mysql
+#  when: installed_mysql.stdout != 'found'
