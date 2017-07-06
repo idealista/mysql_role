@@ -1,6 +1,6 @@
 ---
 ## General
-mysql_config_version: 0.8.0-1
+mysql_config_version: 0.8.6-1
 
 ## Service options
 # start on boot
