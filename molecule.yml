@@ -39,29 +39,32 @@ ansible:
 vagrant:
   # molecules --platform option will look for these names
   raw_config_args:
-  - "landrush.enabled = true"
-  - "landrush.tld = ''"
-  - "landrush.guest_redirect_dns = false"
+    - "landrush.enabled = true"
+    - "landrush.tld = 'vm'"
+    - "landrush.guest_redirect_dns = false"
+
   platforms:
-    - name: Debian
+    - name: Debian8
       box: debian/jessie64
+    - name: Debian9
+      box: debian/stretch64
 
   providers:
     - name: virtualbox
       type: virtualbox
       options:
-        memory: 128
+        memory: 512
         cpus: 1
 
   instances:
-    - name: mysql
+    - name: mysql.vm
       ansible_groups:
         - test01
       interfaces:
         - network_name: private_network
           type: dhcp
           auto_config: true
-    - name: mysqlUpgrade
+    - name: mysqlUpgrade.vm
       ansible_groups:
         - test01
       interfaces:
