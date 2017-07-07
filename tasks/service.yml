@@ -1,5 +1,11 @@
 ---
 
+- name: MySQL | Remounting /run
+  shell: mount -t tmpfs tmpfs /run -o remount,size=32M
+  changed_when: false
+  tags:
+    skip_ansible_lint
+
 - name: MYSQL | Configuring service
   systemd:
     name: mysql

@@ -1,4 +1,4 @@
-![Logo](logo.gif)
+![Logo](https://raw.githubusercontent.com/idealista/mysql-role/master/logo.gif)
 
 # MySQL Ansible role
 

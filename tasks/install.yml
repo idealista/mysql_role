@@ -21,6 +21,7 @@
 - name: MYSQL | Update cache
   apt:
     update_cache: yes
+    allow_unauthenticated: yes
   changed_when: false
 
 - name: MYSQL | Check if mysql is already installed
