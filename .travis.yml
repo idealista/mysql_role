@@ -44,19 +44,19 @@ script:
   # Check the role/playbook's syntax.
   - >
     ansible-playbook -i tests/travis/inventory
-    tests/${ansible_playbook}.yml
+    tests/${ansible_playbook}
     --syntax-check
 
   # Run the role/playbook with ansible-playbook.
   - >
     ansible-playbook -i tests/travis/inventory
-    tests/${ansible_playbook}.yml
+    tests/${ansible_playbook}
 
   # Run the role/playbook again, checking to make sure it's idempotent.
   - idempotence=$(mktemp)
   - >
     ansible-playbook -i tests/travis/inventory
-    tests/${ansible_playbook}.yml
+    tests/${ansible_playbook}
     | tee -a ${idempotence}
   - >
     tail ${idempotence}
@@ -66,7 +66,7 @@ script:
 
   # Run Testinfra tests
   - >
-    testinfra tests/${testinfra_test_file}.py
+    testinfra tests/${testinfra_test_file}
     --connection=ansible
     --ansible-inventory=tests/travis/inventory
 
