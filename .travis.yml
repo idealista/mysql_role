@@ -29,7 +29,8 @@ before_install:
   - pip install testinfra==1.5.5
 
   # Add ansible.cfg to pick up roles path.
-  - "printf '[defaults]\nroles_path = ../:../../' > ansible.cfg"
+  - echo "[defaults]" > ansible.cfg
+  - echo "roles_path = ../:../../" >> ansible.cfg
 
 script:
   # Create a random file to store the container ID.
@@ -67,7 +68,7 @@ script:
   - >
     testinfra tests/${testinfra_test_file}.py
     --connection=ansible
-    --ansible-inventory=tests/travis/inventory'
+    --ansible-inventory=tests/travis/inventory
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
