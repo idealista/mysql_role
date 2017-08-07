@@ -1,10 +1,11 @@
 ---
 
 - name: MySQL | Remounting /run
-  shell: mount -t tmpfs tmpfs /run -o remount,size=32M
+  shell: mount -t tmpfs tmpfs /run -o remount,size={{ mysql_remount_run_size }}
   changed_when: false
   tags:
     skip_ansible_lint
+  when: mysql_remount_run
 
 - name: MYSQL | Configuring service
   systemd:
