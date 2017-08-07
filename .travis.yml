@@ -1,0 +1,73 @@
+---
+language: python
+python: "2.7"
+
+# We need sudo for some of the Docker commands.
+sudo: required
+
+# Environment variables for the containers' use
+env:
+  - docker_image: python:2.7.13-jessie # So we can download the proper Docker image
+    init: /lib/systemd/systemd # So we can use systemd in our container
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro" # So we can use systemd in our container
+    role_name: mysql-role
+    container_name_1: mysql
+    container_name_2: mysqlUpgrade
+    ansible_playbook: playbook.yml
+    testinfra_test_file: test_mysql.py
+
+# Tell Travis to start Docker when it brings up an environment.
+services:
+  - docker
+
+before_install:
+  # Pull image from Docker Hub.
+  - docker pull ${docker_image}
+
+  # Install Ansible and Testinfra
+  - pip install ansible==2.3.1.0
+  - pip install testinfra==1.5.5
+
+  # Add ansible.cfg to pick up roles path.
+  - "printf '[defaults]\nroles_path = ../:../../' > ansible.cfg"
+
+script:
+  # Create a random file to store the container ID.
+  - 'container_id_1=$(mktemp)'
+  - 'container_id_2=$(mktemp)'
+
+  # Run container detached, with our role mounted inside.
+  - 'docker run --name="${container_name_1}" --detach --volume="${PWD}":/etc/ansible/roles/${role_name} ${run_opts} ${docker_image} "${init}" > "${container_id_1}"'
+  - 'docker run --name="${container_name_2}" --detach --volume="${PWD}":/etc/ansible/roles/${role_name} ${run_opts} ${docker_image} "${init}" > "${container_id_2}"'
+
+  # Check the role/playbook's syntax.
+  - >
+    ansible-playbook -i tests/travis/inventory
+    tests/${ansible_playbook}.yml
+    --syntax-check
+
+  # Run the role/playbook with ansible-playbook.
+  - >
+    ansible-playbook -i tests/travis/inventory
+    tests/${ansible_playbook}.yml
+
+  # Run the role/playbook again, checking to make sure it's idempotent.
+  - idempotence=$(mktemp)
+  - >
+    ansible-playbook -i tests/travis/inventory
+    tests/${ansible_playbook}.yml
+    | tee -a ${idempotence}
+  - >
+    tail ${idempotence}
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
+
+  # Run Testinfra tests
+  - >
+    testinfra tests/${testinfra_test_file}.py
+    --connection=ansible
+    --ansible-inventory=tests/travis/inventory'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
