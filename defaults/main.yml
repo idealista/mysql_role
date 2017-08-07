@@ -77,4 +77,4 @@ mysql_users: []
 # Remounting settings
 mysql_remount_run: true
 ## This variable has to include the magnitude M,G...
-mysql_remount_run_size: 512M
+mysql_remount_run_partition_size: 512M

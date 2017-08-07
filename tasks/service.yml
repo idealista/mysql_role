@@ -1,7 +1,7 @@
 ---
 
 - name: MySQL | Remounting /run
-  shell: mount -t tmpfs tmpfs /run -o remount,size={{ mysql_remount_run_size }}
+  shell: mount -t tmpfs tmpfs /run -o remount,size={{ mysql_remount_run_partition_size }}
   changed_when: false
   tags:
     skip_ansible_lint
