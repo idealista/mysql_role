@@ -73,3 +73,8 @@ mysql_users: []
 #     host: 127.0.0.1
 #     password: secret
 #     priv: [ *.*:USAGE ]
+
+# Remounting settings
+mysql_remount_run: true
+## This variable has to include the magnitude M,G...
+mysql_remount_run_partition_size: 512M
