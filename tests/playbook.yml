@@ -18,11 +18,6 @@
         state: present
         install_recommends: no
 
-    - name: Ensure MySQL service is running
-      systemd:
-        service: mysql
-        state: started
-
     - name: Ensure root password is set on first installation
       mysql_user:
         name: root
