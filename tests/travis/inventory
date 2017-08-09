@@ -1,3 +1,0 @@
-[test01]
-mysql ansible_connection=docker
-mysqlUpgrade ansible_connection=docker
