@@ -76,7 +76,8 @@ docker:
     - name: mysql
       ansible_groups:
         - test01
-      image: geerlingguy/docker-debian9-ansible
+      dockerfile: tests/Dockerfile
+      image: debian9-testinfra
       image_version: latest
 
       privileged: True
@@ -89,7 +90,8 @@ docker:
     - name: mysqlUpgrade
       ansible_groups:
         - test01
-      image: geerlingguy/docker-debian9-ansible
+      dockerfile: tests/Dockerfile
+      image: debian9-testinfra
       image_version: latest
 
       privileged: True
