@@ -41,7 +41,7 @@ vagrant:
     - "landrush.enabled = true"
     - "landrush.tld = 'vm'"
     - "landrush.guest_redirect_dns = false"
-  # molecules --platform option will look for these names
+  # molecule's --platform option will look for these names
   platforms:
     - name: Debian8
       box: debian/jessie64
@@ -79,7 +79,7 @@ docker:
       dockerfile: tests/Dockerfile
       image: debian9-testinfra
       image_version: latest
-
+      # All these parameters are needed for Docker testing with systemd
       privileged: True
       cap_add:
         - SYS_ADMIN
@@ -93,7 +93,7 @@ docker:
       dockerfile: tests/Dockerfile
       image: debian9-testinfra
       image_version: latest
-
+      # All these parameters are needed for Docker testing with systemd
       privileged: True
       cap_add:
         - SYS_ADMIN
