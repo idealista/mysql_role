@@ -37,12 +37,11 @@ ansible:
 
 # configuration options for the internal call to vagrant
 vagrant:
-  # molecules --platform option will look for these names
   raw_config_args:
     - "landrush.enabled = true"
     - "landrush.tld = 'vm'"
     - "landrush.guest_redirect_dns = false"
-
+  # molecule's --platform option will look for these names
   platforms:
     - name: Debian8
       box: debian/jessie64
@@ -71,3 +70,39 @@ vagrant:
         - network_name: private_network
           type: dhcp
           auto_config: true
+
+docker:
+  containers:
+    - name: mysql
+      ansible_groups:
+        - test01
+      dockerfile: tests/Dockerfile
+      image: debian9-testinfra
+      image_version: latest
+      # All these parameters are needed for Docker testing with systemd
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume_mounts:
+        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+      command: '/lib/systemd/systemd'
+
+    - name: mysqlUpgrade
+      ansible_groups:
+        - test01
+      dockerfile: tests/Dockerfile
+      image: debian9-testinfra
+      image_version: latest
+      # All these parameters are needed for Docker testing with systemd
+      privileged: True
+      cap_add:
+        - SYS_ADMIN
+      volume_mounts:
+        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+      command: '/lib/systemd/systemd'
+
+verifier:
+  name: testinfra
+  options:
+    connection: ansible
+    ansible-inventory: .molecule/ansible_inventory
