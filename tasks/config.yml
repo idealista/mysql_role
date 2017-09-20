@@ -9,12 +9,6 @@
     mode: 0600
   notify: restart mysql
 
-- name: MySQL | Ensure MySQL is started and enabled on boot
-  service:
-    name: mysql
-    state: started
-    enabled: yes
-
 - name: MySQL | Ensure datadir exists
   file:
     path: "{{ mysql_datadir }}"
@@ -34,3 +28,9 @@
     login_user: root
     login_host: localhost
   when: "installed_mysql.stdout != 'Status: install ok installed'"
+
+- name: MySQL | Ensure MySQL is started and enabled on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes

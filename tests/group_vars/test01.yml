@@ -8,4 +8,4 @@ mysql_users:
     priv:
       - test01.*:ALL
 
-mysql_datadir: /home/vagrant/test
+mysql_datadir: /tmp/test
