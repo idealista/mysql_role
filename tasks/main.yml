@@ -1,28 +1,28 @@
 ---
 
-- name: MYSQL | Install
+- name: MySQL | Install
   include: install.yml
   tags:
     - install
 
-- name: MYSQL | Configure
+- name: MySQL | Configure
   include: config.yml
   tags:
     - configure
 
-- name: MYSQL | Users
+- name: MySQL | Users
   include: users.yml
   tags:
     - configure
     - users
 
-- name: MYSQL | Databases
+- name: MySQL | Databases
   include: databases.yml
   tags:
     - configure
     - databases
 
-- name: MYSQL | Service
+- name: MySQL | Service
   include: service.yml
   tags:
     - service

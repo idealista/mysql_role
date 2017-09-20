@@ -1,5 +1,6 @@
 ---
-- name: MYSQL | Ensure MySQL databases are present.
+
+- name: MySQL | Ensure MySQL databases are present.
   mysql_db:
     login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
