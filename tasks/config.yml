@@ -9,12 +9,6 @@
     mode: 0600
   notify: restart mysql
 
-- name: MySQL | Ensure MySQL is started and enabled on boot
-  service:
-    name: mysql
-    state: started
-    enabled: yes
-
 - name: MySQL | Ensure datadir exists
   file:
     path: "{{ mysql_datadir }}"
@@ -26,6 +20,12 @@
   command: /usr/sbin/mysqld --initialize-insecure --user={{ mysql_user }}
   ignore_errors: yes
   changed_when: false
+
+- name: MySQL | Ensure MySQL is started and enabled on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
 
 - name: MySQL | Set root password
   mysql_user:
