@@ -21,6 +21,12 @@
   ignore_errors: yes
   changed_when: false
 
+- name: MySQL | Ensure MySQL is started and enabled on boot
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
 - name: MySQL | Set root password
   mysql_user:
     name: "{{ mysql_root_user }}"
@@ -28,9 +34,3 @@
     login_user: root
     login_host: localhost
   when: "installed_mysql.stdout != 'Status: install ok installed'"
-
-- name: MySQL | Ensure MySQL is started and enabled on boot
-  service:
-    name: mysql
-    state: started
-    enabled: yes
