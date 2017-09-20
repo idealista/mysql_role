@@ -7,3 +7,5 @@ mysql_users:
     password: testing
     priv:
       - test01.*:ALL
+
+mysql_datadir: /home/vagrant/test
