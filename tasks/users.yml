@@ -1,5 +1,6 @@
 ---
-- name: MYSQL | Ensure MySQL users are present
+
+- name: MySQL | Ensure MySQL users are present
   mysql_user:
     login_user: "{{ mysql_root_user }}"
     login_password: "{{ mysql_root_password }}"
@@ -9,4 +10,4 @@
     priv: "{{  item.priv | default('*.*:USAGE') | join('/') }}"
     append_privs: yes
   with_items: "{{ mysql_users }}"
-  #no_log: true
+  no_log: true

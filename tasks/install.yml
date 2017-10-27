@@ -1,6 +1,6 @@
 ---
 
-- name: MYSQL | Installing dependencies
+- name: MySQL | Installing dependencies
   apt:
     pkg: "{{ item }}"
     state: latest
@@ -8,30 +8,30 @@
   tags:
     skip_ansible_lint
 
-- name: MYSQL | Download mysql config deb
+- name: MySQL | Download mysql config deb
   get_url:
     url: "{{ mysql_deb_repo }}"
     dest: /tmp
     validate_certs: no
 
-- name: MYSQL | Install mysql repo deb
+- name: MySQL | Install mysql repo deb
   apt:
     deb: "/tmp/{{ mysql_deb_package }}"
 
-- name: MYSQL | Update cache
+- name: MySQL | Update cache
   apt:
     update_cache: yes
     allow_unauthenticated: yes
   changed_when: false
 
-- name: MYSQL | Check if mysql is already installed
+- name: MySQL | Check if mysql is already installed
   shell: dpkg -s mysql-server | grep Status
   register: installed_mysql
   ignore_errors: yes
   changed_when: false
   failed_when: false
 
-- name: MYSQL | Install MYSQL packages
+- name: MySQL | Install MYSQL packages
   apt:
     package: "{{ item }}"
     state: present
