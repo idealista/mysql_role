@@ -36,7 +36,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 - src: http://github.com/idealista-tech/mysql-role.git
   scm: git
   version: 1.0.0
-  name: mysql-role
+  name: mysql
 ```
 
 Install the role with ansible-galaxy command:
