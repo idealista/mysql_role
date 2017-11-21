@@ -19,7 +19,7 @@ This ansible role installs a Prometheus Node Exporter in a debian environment.
 
 ## Getting Started
 
-These instructions will get you a copy of the role for your ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) in a Debian system.
+These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) in a Debian system.
 
 ### Prerequisities
 
@@ -33,10 +33,10 @@ For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant
 Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
-- src: http://github.com/idealista-tech/mysql-role.git
+- src: http://github.com/idealista/mysql-role.git
   scm: git
   version: 1.0.0
-  name: mysql-role
+  name: mysql
 ```
 
 Install the role with ansible-galaxy command:
@@ -118,15 +118,15 @@ mysql> show databases;
 
 ## Versioning
 
-For the versions available, see the [tags on this repository](https://github.com/idealista-tech/mysql-role/tags).
+For the versions available, see the [tags on this repository](https://github.com/idealista/mysql-role/tags).
 
 Additionaly you can see what change in each version in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## Authors
 
-* **Idealista** - *Work with* - [idealista-tech](https://github.com/idealista-tech)
+* **Idealista** - *Work with* - [idealista](https://github.com/idealista)
 
-See also the list of [contributors](https://github.com/idealista-tech/mysql-role/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/idealista/mysql-role/contributors) who participated in this project.
 
 ## License
 
