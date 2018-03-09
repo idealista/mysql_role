@@ -33,8 +33,7 @@ For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant
 Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
-- src: http://github.com/idealista/mysql-role.git
-  scm: git
+- src: idealista.mysql-role
   version: 1.0.0
   name: mysql
 ```
@@ -64,7 +63,7 @@ Set at least mysql_root_user and mysql_root_password:
 
 ```yaml
 mysql_root_user: mysql         # Change mysql root user
-mysql_root_password: secret   # Change mysql root password
+mysql_root_password: secret    # Change mysql root password
 ```
 
 Add any number of databases and create users with privs on them
@@ -89,16 +88,16 @@ mysql_users:
 ## Testing
 
 ```
-molecule test
+$ molecule test
 ```
 
 To check the installation
 
 ```bash
-molecule converge
-molecule login
+$ molecule converge
+$ molecule login --host mysql.vm
 
-vagrant@mysql:~$ mysql -u root -pdefault
+vagrant@mysql:~$ mysql -u root -ptesting
 
 mysql> show databases;
 +--------------------+
