@@ -1,11 +1,20 @@
 ---
 
+- name: MySQL | Copy MySQL service config
+  template:
+    src: mysql.service.j2
+    dest: /lib/systemd/system/mysql.service
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    mode: 0755
+  notify: restart mysql
+
 - name: MySQL | Copy global MySQL configuration
   template:
     src: my.cnf.j2
     dest: "{{ mysql_config_file }}"
-    owner: root
-    group: root
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
     mode: 0600
   notify: restart mysql
 
@@ -26,11 +35,5 @@
     name: mysql
     state: started
     enabled: yes
-
-- name: MySQL | Set root password
-  mysql_user:
-    name: "{{ mysql_root_user }}"
-    password: "{{ mysql_root_password }}"
-    login_user: root
-    login_host: localhost
-  when: "installed_mysql.stdout != 'Status: install ok installed'"
+- name: MySQL | Flush handlers to restart MySQL after previous initialization
+  meta: flush_handlers

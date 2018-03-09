@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista-tech/mysql-role/tree/develop)
+
+## [1.2.3](https://github.com/idealista-tech/mysql-role/tree/1.2.3) (09/03/2018)
+[Full Changelog](https://github.com/idealista/mysql-role/compare/1.2.3...1.2.0)
 ### Fixed
+- [#21](https://github.com/idealista/mysql-role/issues/21)*Using my.cnf file provided as template instead of installation default file (mysql.cnf)* @dortegau
 - *Fixing typo in config filename and changing invalid config values* @dortegau
 
 ## [1.2.0](https://github.com/idealista-tech/mysql-role/tree/1.2.0) (10/08/2017)

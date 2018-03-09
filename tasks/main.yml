@@ -1,28 +1,28 @@
 ---
 
 - name: MySQL | Install
-  include: install.yml
+  include_tasks: install.yml
   tags:
     - install
 
 - name: MySQL | Configure
-  include: config.yml
+  include_tasks: config.yml
   tags:
     - configure
 
 - name: MySQL | Users
-  include: users.yml
+  include_tasks: users.yml
   tags:
     - configure
     - users
 
 - name: MySQL | Databases
-  include: databases.yml
+  include_tasks: databases.yml
   tags:
     - configure
     - databases
 
 - name: MySQL | Service
-  include: service.yml
+  include_tasks: service.yml
   tags:
     - service
