@@ -23,18 +23,17 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 
 ### Prerequisities
 
-Ansible 2.2.0.0 version installed.
+Ansible 2.4.3.0 version installed.
 Inventory destination should be a Debian environment.
 
-For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant](https://www.vagrantup.com/) as driver (with [landrush](https://github.com/vagrant-landrush/landrush) plugin) and [VirtualBox](https://www.virtualbox.org/) as provider.
+For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant](https://www.vagrantup.com/) as driver (with [hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) plugin) and [VirtualBox](https://www.virtualbox.org/) as provider.
 
 ### Installing
 
 Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
-- src: http://github.com/idealista/mysql-role.git
-  scm: git
+- src: idealista.mysql-role
   version: 1.0.0
   name: mysql
 ```
@@ -64,7 +63,7 @@ Set at least mysql_root_user and mysql_root_password:
 
 ```yaml
 mysql_root_user: mysql         # Change mysql root user
-mysql_root_password: secret   # Change mysql root password
+mysql_root_password: secret    # Change mysql root password
 ```
 
 Add any number of databases and create users with privs on them
@@ -89,16 +88,16 @@ mysql_users:
 ## Testing
 
 ```
-molecule test
+$ molecule test
 ```
 
 To check the installation
 
 ```bash
-molecule converge
-molecule login
+$ molecule converge
+$ molecule login --host mysql.vm
 
-vagrant@mysql:~$ mysql -u root -pdefault
+vagrant@mysql:~$ mysql -u root -ptesting
 
 mysql> show databases;
 +--------------------+
@@ -114,7 +113,7 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-2.2.0.0-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-2.4.3.0-green.svg)
 
 ## Versioning
 
@@ -132,7 +131,7 @@ See also the list of [contributors](https://github.com/idealista/mysql-role/cont
 
 ![Apache 2.0 Licence](https://img.shields.io/hexpm/l/plug.svg)
 
-This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license - see the [LICENSE.txt](LICENSE.txt) file for details.
+This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
