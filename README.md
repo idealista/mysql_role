@@ -1,6 +1,7 @@
 ![Logo](https://raw.githubusercontent.com/idealista/mysql-role/master/logo.gif)
 
-# MySQL Ansible role [![Build Status](https://travis-ci.org/idealista/mysql-role.png)](https://travis-ci.org/idealista/mysql-role)
+# MySQL Ansible role 
+[![Build Status](https://travis-ci.org/idealista/mysql-role.png)](https://travis-ci.org/idealista/mysql-role)
 
 This ansible role installs a Prometheus Node Exporter in a debian environment.
 
