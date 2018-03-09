@@ -23,10 +23,10 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 
 ### Prerequisities
 
-Ansible 2.2.0.0 version installed.
+Ansible 2.4.3.0 version installed.
 Inventory destination should be a Debian environment.
 
-For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant](https://www.vagrantup.com/) as driver (with [landrush](https://github.com/vagrant-landrush/landrush) plugin) and [VirtualBox](https://www.virtualbox.org/) as provider.
+For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant](https://www.vagrantup.com/) as driver (with [hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) plugin) and [VirtualBox](https://www.virtualbox.org/) as provider.
 
 ### Installing
 
@@ -114,7 +114,7 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-2.2.0.0-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-2.4.3.0-green.svg)
 
 ## Versioning
 
@@ -132,7 +132,7 @@ See also the list of [contributors](https://github.com/idealista/mysql-role/cont
 
 ![Apache 2.0 Licence](https://img.shields.io/hexpm/l/plug.svg)
 
-This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license - see the [LICENSE.txt](LICENSE.txt) file for details.
+This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license - see the [LICENSE](LICENSE) file for details.
 
 ## Contributing
 
