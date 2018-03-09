@@ -1,0 +1,48 @@
+group:
+  {{ mysql_group }}:
+    exists: true
+
+user:
+  {{ mysql_user }}:
+    exists: true
+    groups:
+      - {{ mysql_group }}
+
+file:
+  {{ mysql_config_file }}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: file
+  {{ mysql_datadir }}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: directory
+
+mount:
+  /run:
+    exists: true
+
+service:
+  mysql:
+    enabled: true
+    running: true
+
+process:
+  mysqld:
+    running: true
+
+port:
+  tcp:{{ mysql_port }}:
+    listening: true
+    ip:
+    - {{ mysql_bind_address }}
+
+package:
+    python-mysqldb:
+      installed: true
+    mysql-common:
+      installed: true
+    mysql-server:
+      installed: true

@@ -8,13 +8,13 @@
   tags:
     skip_ansible_lint
 
-- name: MySQL | Download mysql config deb
+- name: MySQL | Download MySQL config deb
   get_url:
     url: "{{ mysql_deb_repo }}"
     dest: /tmp
     validate_certs: no
 
-- name: MySQL | Install mysql repo deb
+- name: MySQL | Install MySQL repo deb
   apt:
     deb: "/tmp/{{ mysql_deb_package }}"
 
@@ -24,14 +24,14 @@
     allow_unauthenticated: yes
   changed_when: false
 
-- name: MySQL | Check if mysql is already installed
+- name: MySQL | Check if MySQL is already installed
   shell: dpkg -s mysql-server | grep Status
   register: installed_mysql
   ignore_errors: yes
   changed_when: false
   failed_when: false
 
-- name: MySQL | Install MYSQL packages
+- name: MySQL | Install MySQL packages
   apt:
     package: "{{ item }}"
     state: present

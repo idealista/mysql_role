@@ -1,6 +1,6 @@
 ---
 
-- name: MySQL | Copy mysql service config
+- name: MySQL | Copy MySQL service config
   template:
     src: mysql.service.j2
     dest: /lib/systemd/system/mysql.service
