@@ -1,5 +1,5 @@
 ---
-
-- hosts: all
+- name: Converge
+  hosts: all
   roles:
     - role: mysql-role

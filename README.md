@@ -1,6 +1,6 @@
 ![Logo](https://raw.githubusercontent.com/idealista/mysql-role/master/logo.gif)
 
-# MySQL Ansible role 
+# MySQL Ansible role
 [![Build Status](https://travis-ci.org/idealista/mysql-role.png)](https://travis-ci.org/idealista/mysql-role)
 
 This ansible role installs a Prometheus Node Exporter in a debian environment.
@@ -25,7 +25,7 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 Ansible 2.4.3.0 version installed.
 Inventory destination should be a Debian environment.
 
-For testing purposes, [Molecule](https://molecule.readthedocs.io/) with [Vagrant](https://www.vagrantup.com/) as driver (with [hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) plugin) and [VirtualBox](https://www.virtualbox.org/) as provider.
+For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
 
 ### Installing
 
@@ -87,14 +87,14 @@ mysql_users:
 ## Testing
 
 ```
-$ molecule test
+$ pipenv install -r test-requirements.txt -python 2.7
 ```
 
 To check the installation
 
 ```bash
-$ molecule converge
-$ molecule login --host mysql.vm
+$ pipenv run molecule converge
+$ pipenv run molecule login
 
 vagrant@mysql:~$ mysql -u root -ptesting
 
@@ -113,6 +113,8 @@ mysql> show databases;
 ## Built With
 
 ![Ansible](https://img.shields.io/badge/ansible-2.4.3.0-green.svg)
+![Molecule](https://img.shields.io/badge/molecule-2.10.1-green.svg)
+![Goss](https://img.shields.io/badge/goss-0.3.5-green.svg)
 
 ## Versioning
 

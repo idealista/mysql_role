@@ -1,3 +1,4 @@
+---
 group:
   {{ mysql_group }}:
     exists: true
@@ -36,13 +37,11 @@ process:
 port:
   tcp:{{ mysql_port }}:
     listening: true
-    ip:
-    - {{ mysql_bind_address }}
 
 package:
-    python-mysqldb:
-      installed: true
-    mysql-common:
-      installed: true
-    mysql-server:
-      installed: true
+  python-mysqldb:
+    installed: true
+  mysql-common:
+    installed: true
+  mysql-server:
+    installed: true
