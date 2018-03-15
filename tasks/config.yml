@@ -27,13 +27,13 @@
 
 - name: MySQL | Trying to initialize datadir
   command: /usr/sbin/mysqld --initialize-insecure --user={{ mysql_user }}
-  ignore_errors: yes
+  ignore_errors: "yes"
   changed_when: false
 
 - name: MySQL | Ensure MySQL is started and enabled on boot
   service:
     name: mysql
     state: started
-    enabled: yes
+    enabled: "yes"
 - name: MySQL | Flush handlers to restart MySQL after previous initialization
   meta: flush_handlers

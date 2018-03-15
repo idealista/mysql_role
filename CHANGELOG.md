@@ -5,6 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a ch
 
 ## [Unreleased](https://github.com/idealista-tech/mysql-role/tree/develop)
 
+### Added
+- [#26](https://github.com/idealista/mysql-role/issues/26) *Adding the ability to configure SQL mode* @dortegau
+
+### Changed
+- [#25](https://github.com/idealista/mysql-role/issues/25) *Migrating to Molecule 2.10.1* @dortegau
+
+### Fixed
+- [#24](https://github.com/idealista/mysql-role/issues/24) *Fixing my.cnf template (providing value to 'explicit_defaults_for_timestamp')* @dortegau
+
 ## [1.2.3](https://github.com/idealista-tech/mysql-role/tree/1.2.3) (09/03/2018)
 [Full Changelog](https://github.com/idealista/mysql-role/compare/1.2.3...1.2.0)
 ### Fixed

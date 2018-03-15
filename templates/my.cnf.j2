@@ -13,7 +13,8 @@ basedir = {{ mysql_basedir }}
 lc-messages-dir = {{ mysql_lc_messagesdir }}
 socket = {{ mysql_socket }}
 pid-file = {{ mysql_pid_file }}
-explicit_defaults_for_timestamp
+explicit_defaults_for_timestamp = 1
+sql_mode = "{{ mysql_sql_mode }}"
 
 # * IMPORTANT: Additional settings that can override those from this file!
 #   The files must end with '.cnf', otherwise they'll be ignored.
