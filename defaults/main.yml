@@ -11,59 +11,9 @@ mysql_service_enabled: true
 # current state: started, stopped
 mysql_service_state: started
 
-mysql_root_user: root
-mysql_root_password: default
-
 # Files & Paths
 mysql_config_file: /etc/mysql/my.cnf
-mysql_socket: /var/run/mysqld/mysqld.sock
-mysql_datadir: /var/lib/mysql
-mysql_basedir: /usr
-mysql_tmpdir: /tmp
-mysql_lc_messagesdir: /usr/share/mysql
 mysql_pid_file: /var/run/mysqld/mysqld.pid
-
-# MySQL connection settings.
-mysql_port: 3306
-mysql_bind_address: 0.0.0.0
-
-# Slow query log settings.
-mysql_slow_query_log_file: /var/log/mysql/mysql-slow.log
-mysql_slow_query_time: 2
-
-# Memory settings (default values optimized ~512MB RAM).
-mysql_key_buffer_size: "256M"
-mysql_max_allowed_packet: "64M"
-mysql_table_open_cache: "256"
-mysql_sort_buffer_size: "1M"
-mysql_read_buffer_size: "1M"
-mysql_read_rnd_buffer_size: "4M"
-mysql_myisam_sort_buffer_size: "64M"
-mysql_thread_cache_size: "8"
-mysql_query_cache_size: "16M"
-mysql_max_connections: 151
-
-# Other settings.
-mysql_wait_timeout: 28800
-mysql_sql_mode: "ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
-
-# InnoDB settings.
-# Set .._buffer_pool_size up to 80% of RAM but beware of setting too high.
-mysql_innodb_file_per_table: "1"
-mysql_innodb_buffer_pool_size: "256M"
-# Set .._log_file_size to 25% of buffer pool size.
-mysql_innodb_log_file_size: "64M"
-mysql_innodb_log_buffer_size: "8M"
-mysql_innodb_flush_log_at_trx_commit: "1"
-mysql_innodb_lock_wait_timeout: 50
-
-# mysqldump settings.
-mysql_mysqldump_max_allowed_packet: "64M"
-
-# Logging settings.
-mysql_log: /var/log/mysql/mysql.log
-mysql_log_error: /var/log/mysql/mysql.err
-mysql_syslog_tag: mysql
 
 # Databases.
 mysql_databases: []
@@ -72,6 +22,9 @@ mysql_databases: []
 #     encoding: utf8
 
 # Users.
+mysql_root_user: root
+mysql_root_password: default
+
 mysql_users: []
 #   - name: example
 #     host: 127.0.0.1
@@ -82,3 +35,56 @@ mysql_users: []
 mysql_remount_run: true
 ## This variable has to include the magnitude M,G...
 mysql_remount_run_partition_size: 512M
+
+## Options file groups with options to define System variables
+## Check https://dev.mysql.com/doc/refman/5.7/en/option-files.html
+##
+## Use 'SHOW VARIABLES' (https://dev.mysql.com/doc/refman/5.7/en/show-variables.html)
+## to show available system variables or check
+## https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html
+mysql_global_variables:
+  include_dirs:
+    - /etc/mysql/conf.d/
+  groups:
+    client:
+      user: "{{ mysql_user }}"
+      password: mysql_root_password
+      port: 3306
+      socket: /var/run/mysqld/mysqld.sock
+    mysqld:
+      port: 3306
+      bind-address: 0.0.0.0
+      socket: /var/run/mysqld/mysqld.sock
+      basedir: /usr/
+      tmpdir: /tmp
+      datadir: /var/lib/mysql
+      lc-messages-dir: /usr/share/mysql
+      pid_file: "{{ mysql_pid_file }}"
+      slow_launch_time: 2
+      key_buffer_size: 256M
+      max_allowed_packet: 64M
+      table_open_cache: 256
+      sort_buffer_size: 1M
+      read_buffer_size: 1M
+      read_rnd_buffer_size: 4M
+      thread_cache_size: 8
+      max_connections: 151
+      wait_timeout: 28800
+      sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+      innodb_file_per_table: ON
+      innodb_buffer_pool_size: 256M
+      innodb_flush_log_at_trx_commit: 1
+      innodb_lock_wait_timeout: 50
+      innodb_log_file_size: 64M
+      innodb_log_buffer_size: 8M
+      general_log_file: /var/log/mysql/mysql.log
+      log_syslog_tag: mysql
+      slow_query_log_file: /var/log/mysql/mysql-slow.log
+      slow_query_log: ON
+    mysqldump:
+      quick: 1
+      max_allowed_packet: 64M
+    mysql_safe:
+      pid-file: "{{ mysql_pid_file }}"
+      socket: /var/run/mysqld/mysqld.sock
+      nice: 0

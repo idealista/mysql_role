@@ -1,4 +1,5 @@
 ---
+
 - name: MySQL | Set root password
   mysql_user:
     name: "{{ mysql_root_user }}"

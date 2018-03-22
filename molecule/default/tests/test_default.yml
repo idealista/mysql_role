@@ -15,7 +15,14 @@ file:
     group: {{ mysql_group }}
     exists: true
     filetype: file
-  {{ mysql_datadir }}:
+    mode: "0600"
+  /lib/systemd/system/mysql.service:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: file
+    mode: "0755"
+  {{ mysql_global_variables.groups.mysqld.datadir }}:
     owner: {{ mysql_user }}
     group: {{ mysql_group }}
     exists: true
@@ -35,7 +42,7 @@ process:
     running: true
 
 port:
-  tcp:{{ mysql_port }}:
+  tcp:{{ mysql_global_variables.groups.mysqld.port }}:
     listening: true
 
 package:
