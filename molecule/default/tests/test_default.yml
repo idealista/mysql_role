@@ -42,7 +42,7 @@ process:
     running: true
 
 port:
-  tcp:3306:
+  tcp:{{ mysql_global_variables.groups.mysqld.port }}:
     listening: true
 
 package:
