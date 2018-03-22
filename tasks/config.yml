@@ -30,6 +30,9 @@
   ignore_errors: "yes"
   changed_when: false
 
+- name: MySQL | Flush handlers to restart MySQL after previous initialization
+  meta: flush_handlers
+
 - name: MySQL | Ensure MySQL is started and enabled on boot
   service:
     name: mysql

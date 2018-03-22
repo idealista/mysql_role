@@ -7,8 +7,6 @@
     login_user: root
     login_host: localhost
   when: "installed_mysql.stdout != 'Status: install ok installed'"
-- name: MySQL | Flush handlers to restart MySQL after previous initialization
-  meta: flush_handlers
 
 - name: MySQL | Ensure MySQL users are present
   mysql_user:
