@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista-tech/mysql-role/tree/develop)
+### Added
+- [#35](https://github.com/idealista/mysql-role/issues/35) *Provide additional settings as option files included in playbook* @dortegau
+
 ### Fixed
 - [#34](https://github.com/idealista/mysql-role/issues/34) *Adding default value for mysql_datadir variable* @dortegau
 
