@@ -27,6 +27,23 @@ file:
     group: {{ mysql_group }}
     exists: true
     filetype: directory
+  {{ mysql_extra_conf_include_dir }}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: directory
+  "{{ mysql_extra_conf_include_dir }}/test_file.cnf":
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: file
+    mode: "0600"
+  "{{ mysql_extra_conf_include_dir }}/test_template.cnf":
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: file
+    mode: "0600"
 
 mount:
   /run:
