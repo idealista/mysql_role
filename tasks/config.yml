@@ -18,6 +18,50 @@
     mode: 0600
   notify: restart mysql
 
+- name: MySQL | Ensure additional options file include dir exists
+  file:
+    path: "{{ mysql_extra_conf_include_dir }}"
+    state: directory
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    mode: 0600
+
+- name: MySQL | Ensure additional options file and template paths exists
+  file:
+    path: "{{ mysql_extra_conf_include_dir }}/{{ item.path }}"
+    state: directory
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    mode: 0600
+  with_filetree:
+    - "{{ mysql_extra_conf_playbook_path }}/"
+    - "{{ mysql_extra_conf_template_playbook_path }}/"
+  when: item.state == "directory"
+
+- name: MySQL | Copy extra option files (provided by playbooks)
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ mysql_extra_conf_include_dir }}/{{ item.path }}"
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    mode: 0600
+  with_filetree:
+    - "{{ mysql_extra_conf_playbook_path }}/"
+  when: item.state == "file"
+  notify: restart mysql
+
+- name: MySQL | Copy extra option files templates (provided by playbooks)
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ mysql_extra_conf_include_dir }}/{{ item.path | splitext | first }}"  # This is to remove .j2 extension
+    owner: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    mode: 0600
+  with_filetree:
+    - "{{ mysql_extra_conf_template_playbook_path }}/"
+  when: item.state == "file"
+  notify: restart mysql
+
 - name: MySQL | Ensure datadir exists
   file:
     path: "{{ mysql_datadir }}"
@@ -30,13 +74,11 @@
   ignore_errors: "yes"
   changed_when: false
 
-- name: MySQL | Flush handlers to restart MySQL after previous initialization
-  meta: flush_handlers
-
 - name: MySQL | Ensure MySQL is started and enabled on boot
   service:
     name: mysql
     state: started
     enabled: "yes"
+
 - name: MySQL | Flush handlers to restart MySQL after previous initialization
   meta: flush_handlers

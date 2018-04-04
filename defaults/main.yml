@@ -14,6 +14,12 @@ mysql_service_state: started
 # Files & Paths
 mysql_config_file: /etc/mysql/my.cnf
 mysql_pid_file: /var/run/mysqld/mysqld.pid
+mysql_datadir: /var/lib/mysql
+
+# Allowing playbooks to provide external option files
+mysql_extra_conf_include_dir: /etc/mysql/conf.d
+mysql_extra_conf_playbook_path: "{{ playbook_dir }}/files/mysql/conf"
+mysql_extra_conf_template_playbook_path: "{{ playbook_dir }}/templates/mysql/conf"
 
 # Databases.
 mysql_databases: []
@@ -44,11 +50,11 @@ mysql_remount_run_partition_size: 512M
 ## https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html
 mysql_global_variables:
   include_dirs:
-    - /etc/mysql/conf.d/
+    - "{{ mysql_extra_conf_include_dir }}"
   groups:
     client:
       user: "{{ mysql_user }}"
-      password: mysql_root_password
+      password: "{{ mysql_root_password }}"
       port: 3306
       socket: /var/run/mysqld/mysqld.sock
     mysqld:
@@ -57,7 +63,7 @@ mysql_global_variables:
       socket: /var/run/mysqld/mysqld.sock
       basedir: /usr/
       tmpdir: /tmp
-      datadir: /var/lib/mysql
+      datadir: "{{ mysql_datadir }}"
       lc-messages-dir: /usr/share/mysql
       pid_file: "{{ mysql_pid_file }}"
       slow_launch_time: 2
@@ -71,7 +77,7 @@ mysql_global_variables:
       max_connections: 151
       wait_timeout: 28800
       sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
-      innodb_file_per_table: ON
+      innodb_file_per_table: "ON"
       innodb_buffer_pool_size: 256M
       innodb_flush_log_at_trx_commit: 1
       innodb_lock_wait_timeout: 50
@@ -80,7 +86,7 @@ mysql_global_variables:
       general_log_file: /var/log/mysql/mysql.log
       log_syslog_tag: mysql
       slow_query_log_file: /var/log/mysql/mysql-slow.log
-      slow_query_log: ON
+      slow_query_log: "ON"
     mysqldump:
       quick: 1
       max_allowed_packet: 64M
