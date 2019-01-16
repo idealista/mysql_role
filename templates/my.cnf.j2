@@ -13,7 +13,14 @@
 {% for group_name, options in mysql_global_variables.groups.items() %}
 [{{ group_name }}]
 {% for name, value in options.items() %}
+{# replicate_ignore_table may be repeated more than once #}
+{% if name == "replicate_ignore_table" %}
+{% for table in value %}
+{{ name }} = {{ table }}
+{% endfor %}
+{% else %}
 {{ name }} = {{ value }}
+{% endif %}
 {% endfor %}
 
 {% endfor %}
