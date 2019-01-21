@@ -15,7 +15,7 @@
     name: "{{ item.name }}"
     host: "{{ item.host | default('localhost') }}"
     password: "{{ item.password }}"
-    priv: "{{  item.priv | default('*.*:USAGE') | join('/') }}"
+    priv: "{{  item.priv | default(['*.*:USAGE']) | join('/') }}"
     append_privs: "yes"
   with_items: "{{ mysql_users }}"
   no_log: true
