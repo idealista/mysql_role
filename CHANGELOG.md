@@ -13,6 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a ch
 ### Added
 - [#41](https://github.com/idealista/mysql_role/pull/41) *Manage replicate_ignore_table special case* @vide
 
+### Fixed 
+- [#43](https://github.com/idealista/mysql_role/pull/43) *Fixed users default privileges* @vide
+
 ## [2.1.0](https://github.com/idealista-tech/mysql_role/tree/2.1.0) (04/04/2018)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/2.1.0...2.0.0)
 ### Added

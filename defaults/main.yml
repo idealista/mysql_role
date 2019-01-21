@@ -35,7 +35,7 @@ mysql_users: []
 #   - name: example
 #     host: 127.0.0.1
 #     password: secret
-#     priv: [ *.*:USAGE ]
+#     priv: [ '*.*:USAGE' ]
 
 # Remounting settings
 mysql_remount_run: true
