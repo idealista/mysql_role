@@ -18,6 +18,11 @@
   apt:
     deb: "/tmp/{{ mysql_deb_package }}"
 
+- name: MySQL | Fix Oracle's GPG key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: A4A9406876FCBD3C456770C88C718D3B5072E1F5
+
 - name: MySQL | Update cache
   apt:
     update_cache: "yes"
