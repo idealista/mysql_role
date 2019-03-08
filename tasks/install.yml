@@ -3,10 +3,8 @@
 - name: MySQL | Installing dependencies
   apt:
     pkg: "{{ item }}"
-    state: latest
+    state: present
   with_items: "{{ mysql_required_libs }}"
-  tags:
-    skip_ansible_lint
 
 - name: MySQL | Download MySQL config deb
   get_url:
@@ -18,16 +16,21 @@
   apt:
     deb: "/tmp/{{ mysql_deb_package }}"
 
+- name: MySQL | Fix Oracle's GPG key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: A4A9406876FCBD3C456770C88C718D3B5072E1F5
+
 - name: MySQL | Update cache
   apt:
-    update_cache: "yes"
-    allow_unauthenticated: "yes"
+    update_cache: true
+    allow_unauthenticated: true
   changed_when: false
 
 - name: MySQL | Check if MySQL is already installed
   shell: dpkg -s mysql-server | grep Status
   register: installed_mysql
-  ignore_errors: "yes"
+  ignore_errors: true
   changed_when: false
   failed_when: false
 
@@ -35,7 +38,7 @@
   apt:
     package: "{{ item }}"
     state: present
-    allow_unauthenticated: "yes"
+    allow_unauthenticated: true
   with_items: "{{ mysql_packages }}"
   register: install_mysql
   notify: upgrade schemas

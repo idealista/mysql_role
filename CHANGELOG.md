@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
+### Fixed 
+- [#45](https://github.com/idealista/mysql_role/pull/45) *Fixed Oracle expired key* @jnogol
+
+### Changed
+- *Change "yes" for true due to linter recommendation* @jnogol
 
 ## [2.2.1](https://github.com/idealista/mysql_role/tree/2.2.1) (21/01/2018)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/2.2.0...2.2.1)
