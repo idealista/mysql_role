@@ -24,7 +24,7 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 
 ### Prerequisities
 
-Ansible 2.4.3.0 version installed.
+Ansible 2.7.9.0 version installed.
 Inventory destination should be a Debian environment.
 
 For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
@@ -89,16 +89,17 @@ mysql_users:
 ## Testing
 
 ```
-$ pipenv install -r test-requirements.txt -python 2.7
+$ pipenv sync
+$ pipenv run molecule test --scenario-name=mysql
 ```
 
 To check the installation
 
 ```bash
-$ pipenv run molecule converge
-$ pipenv run molecule login
+$ pipenv run molecule converge --scenario-name=mysql
+$ pipenv run molecule login --scenario-name=mysql
 
-vagrant@mysql:~$ mysql -u root -ptesting
+root@mariadb:/# mysql -u root -ptesting
 
 mysql> show databases;
 +--------------------+
@@ -106,7 +107,7 @@ mysql> show databases;
 +--------------------+
 | information_schema |
 | mysql              |
-| mysql_test         |
+| test01             |
 | performance_schema |
 +--------------------+
 4 rows in set (0.00 sec)
@@ -114,8 +115,8 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-2.4.3.0-green.svg)
-![Molecule](https://img.shields.io/badge/molecule-2.10.1-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-2.7.9.0-green.svg)
+![Molecule](https://img.shields.io/badge/molecule-2.20.0-green.svg)
 ![Goss](https://img.shields.io/badge/goss-0.3.5-green.svg)
 
 ## Versioning
