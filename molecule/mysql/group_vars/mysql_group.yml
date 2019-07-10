@@ -9,4 +9,4 @@ mysql_users:
     priv:
       - test01.*:ALL
 
-mysql_datadir: /tmp/test
+mysql_datadir: /var/lib/mysql

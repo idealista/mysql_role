@@ -1,0 +1,72 @@
+---
+group:
+  "{{ mysql_group }}":
+    exists: true
+
+user:
+  {{ mysql_user }}:
+    exists: true
+    groups:
+      - {{ mysql_group }}
+
+file:
+  {{ mysql_config_file }}:
+    owner: root
+    group: root
+    exists: true
+    filetype: symlink
+  /lib/systemd/system/mariadb.service:
+    owner: root
+    group: root
+    exists: true
+    filetype: file
+    mode: "0644"
+  {{ mysql_global_variables.groups.mysqld.datadir }}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: directory
+    mode: "0750"
+  {{ mysql_extra_conf_include_dir }}:
+    owner: root
+    group: root
+    exists: true
+    filetype: directory
+    mode: "0755"
+  "{{ mysql_extra_conf_include_dir }}/test_file.cnf":
+    owner: root
+    group: root
+    exists: true
+    filetype: file
+    mode: "0644"
+  "{{ mysql_extra_conf_include_dir }}/test_template.cnf":
+    owner: root
+    group: root
+    exists: true
+    filetype: file
+    mode: "0644"
+
+mount:
+  /run:
+    exists: true
+
+service:
+  mysql:
+    enabled: true
+    running: true
+
+process:
+  mysqld:
+    running: true
+
+port:
+  tcp:{{ mysql_global_variables.groups.mysqld.port }}:
+    listening: true
+
+package:
+  python-mysqldb:
+    installed: true
+  mysql-common:
+    installed: true
+  mysql-server:
+    installed: true
