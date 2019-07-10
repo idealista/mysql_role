@@ -1,6 +1,23 @@
 ---
 ## General
+mysql_flavour: mysql
+# Alt option:
+# mysql_flavour: mariadb
 mysql_config_version: 0.8.6-1
+
+mysql_deb_package: "mysql-apt-config_{{ mysql_config_version }}_all.deb"
+mysql_deb_repo: "http://dev.mysql.com/get/{{ mysql_deb_package }}"
+
+mysql_required_libs:
+  - python-mysqldb
+
+mysql_packages:
+  - mysql-common
+  - mysql-server
+
+# Packages for MariaDB:
+# mysql_packages:
+#   - mariadb-server
 
 mysql_user: mysql
 mysql_group: mysql
@@ -59,12 +76,12 @@ mysql_global_variables:
       socket: /var/run/mysqld/mysqld.sock
     mysqld:
       port: 3306
-      bind-address: 0.0.0.0
+      bind_address: 0.0.0.0
       socket: /var/run/mysqld/mysqld.sock
       basedir: /usr/
       tmpdir: /tmp
       datadir: "{{ mysql_datadir }}"
-      lc-messages-dir: /usr/share/mysql
+      lc_messages_dir: /usr/share/mysql
       pid_file: "{{ mysql_pid_file }}"
       slow_launch_time: 2
       key_buffer_size: 256M
@@ -91,6 +108,6 @@ mysql_global_variables:
       quick: 1
       max_allowed_packet: 64M
     mysql_safe:
-      pid-file: "{{ mysql_pid_file }}"
+      pid_file: "{{ mysql_pid_file }}"
       socket: /var/run/mysqld/mysqld.sock
       nice: 0
