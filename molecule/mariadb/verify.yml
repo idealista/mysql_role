@@ -21,7 +21,7 @@
 
   vars_files:
     - ../../defaults/main.yml
-    - ../../vars/main.yml
+    - ../../vars/mariadb.yml
     - ./group_vars/mariadb_group.yml
 
   tasks:

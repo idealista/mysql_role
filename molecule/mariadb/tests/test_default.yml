@@ -68,5 +68,5 @@ package:
     installed: true
   mysql-common:
     installed: true
-  mysql-server:
+  mariadb-server:
     installed: true
