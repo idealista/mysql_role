@@ -90,10 +90,10 @@ mysql_users:
 
 ```
 $ pipenv sync
-$ pipenv run molecule test --scenario-name=mysql
+$ pipenv run molecule test --all
 ```
 
-To check the installation
+To check the installation, example with Oracle's MySQL implementation:
 
 ```bash
 $ pipenv run molecule converge --scenario-name=mysql
