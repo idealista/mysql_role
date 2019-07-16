@@ -99,7 +99,7 @@ To check the installation, example with Oracle's MySQL implementation:
 $ pipenv run molecule converge --scenario-name=mysql
 $ pipenv run molecule login --scenario-name=mysql
 
-root@mariadb:/# mysql -u root -ptesting
+root@mysql:/# mysql -u root -ptesting
 
 mysql> show databases;
 +--------------------+
