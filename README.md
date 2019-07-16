@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/idealista/mysql_role.png)](https://travis-ci.org/idealista/mysql_role)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-idealista.mysql__role-B62682.svg)](https://galaxy.ansible.com/idealista/mysql_role)
 
-This ansible role installs a Prometheus Node Exporter in a debian environment.
+This ansible role installs an Oracle MySQL or MariaDB server in a debian environment.
 
 - [Getting Started](#getting-started)
 	- [Prerequisities](#prerequisities)
@@ -20,7 +20,7 @@ This ansible role installs a Prometheus Node Exporter in a debian environment.
 
 ## Getting Started
 
-These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) in a Debian system.
+These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) or [MariaDB server](https://mariadb.org/) in a Debian system.
 
 ### Prerequisities
 
@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 1.0.0
+  version: 2.0.0
   name: mysql
 ```
 
