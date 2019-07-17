@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
+### Fixed 
+- [#50](https://github.com/idealista/mysql_role/pull/50) *Add MariaDB Debian packages support* @frantsao
+### Changed
+- [#50](https://github.com/idealista/mysql_role/pull/50) *Fix files and directories permissions* @frantsao
 
 ## [2.2.2](https://github.com/idealista/mysql_role/tree/2.2.1) (08/03/2019)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/2.2.0...2.2.1)

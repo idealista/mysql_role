@@ -1,6 +1,6 @@
 ---
 group:
-  {{ mysql_group }}:
+  "{{ mysql_group }}":
     exists: true
 
 user:
@@ -11,39 +11,41 @@ user:
 
 file:
   {{ mysql_config_file }}:
-    owner: {{ mysql_user }}
-    group: {{ mysql_group }}
+    owner: root
+    group: root
     exists: true
     filetype: file
-    mode: "0600"
+    mode: "0644"
   /lib/systemd/system/mysql.service:
-    owner: {{ mysql_user }}
-    group: {{ mysql_group }}
+    owner: root
+    group: root
     exists: true
     filetype: file
-    mode: "0755"
+    mode: "0644"
   {{ mysql_global_variables.groups.mysqld.datadir }}:
     owner: {{ mysql_user }}
     group: {{ mysql_group }}
     exists: true
     filetype: directory
+    mode: "0750"
   {{ mysql_extra_conf_include_dir }}:
-    owner: {{ mysql_user }}
-    group: {{ mysql_group }}
+    owner: root
+    group: root
     exists: true
     filetype: directory
+    mode: "0755"
   "{{ mysql_extra_conf_include_dir }}/test_file.cnf":
-    owner: {{ mysql_user }}
-    group: {{ mysql_group }}
+    owner: root
+    group: root
     exists: true
     filetype: file
-    mode: "0600"
+    mode: "0644"
   "{{ mysql_extra_conf_include_dir }}/test_template.cnf":
-    owner: {{ mysql_user }}
-    group: {{ mysql_group }}
+    owner: root
+    group: root
     exists: true
     filetype: file
-    mode: "0600"
+    mode: "0644"
 
 mount:
   /run:

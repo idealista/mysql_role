@@ -1,0 +1,29 @@
+---
+- name: MySQL | Gather OS specific variables
+  include_vars: "{{ mysql_flavour }}.yml"
+
+- name: MySQL | Installing dependencies
+  apt:
+    pkg: "{{ mysql_required_libs }}"
+    state: present
+
+- name: MySQL | Update cache
+  apt:
+    update_cache: true
+    allow_unauthenticated: true
+  changed_when: false
+
+- name: MySQL | Check if MySQL is already installed
+  shell: dpkg -s "{{ mysql_flavour }}-server" | grep Status
+  register: installed_mysql
+  ignore_errors: true
+  changed_when: false
+  failed_when: false
+
+- name: MySQL | Install MySQL packages
+  apt:
+    pkg: "{{ mysql_packages }}"
+    state: present
+    allow_unauthenticated: true
+  register: install_mysql
+  notify: upgrade schemas

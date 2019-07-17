@@ -1,7 +1,7 @@
 ---
 
 - name: MySQL | Install
-  include_tasks: install.yml
+  include_tasks: install_{{ mysql_flavour }}.yml
   tags:
     - install
 

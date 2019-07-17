@@ -2,37 +2,38 @@
 
 - name: MySQL | Copy MySQL service config
   template:
-    src: mysql.service.j2
-    dest: /lib/systemd/system/mysql.service
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0755
+    src: "{{ mysql_flavour }}.service.j2"
+    dest: "/lib/systemd/system/{{ mysql_flavour }}.service"
+    owner: root
+    group: root
+    mode: 0644
   notify: restart mysql
 
 - name: MySQL | Copy global MySQL configuration
   template:
     src: my.cnf.j2
     dest: "{{ mysql_config_file }}"
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0600
+    owner: root
+    group: root
+    mode: 0644
   notify: restart mysql
+  when: mysql_flavour == 'mysql'
 
 - name: MySQL | Ensure additional options file include dir exists
   file:
     path: "{{ mysql_extra_conf_include_dir }}"
     state: directory
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0600
+    owner: root
+    group: root
+    mode: 0755
 
 - name: MySQL | Ensure additional options file and template paths exists
   file:
     path: "{{ mysql_extra_conf_include_dir }}/{{ item.path }}"
     state: directory
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0600
+    owner: root
+    group: root
+    mode: 0755
   with_filetree:
     - "{{ mysql_extra_conf_playbook_path }}/"
     - "{{ mysql_extra_conf_template_playbook_path }}/"
@@ -42,9 +43,9 @@
   copy:
     src: "{{ item.src }}"
     dest: "{{ mysql_extra_conf_include_dir }}/{{ item.path }}"
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0600
+    owner: root
+    group: root
+    mode: 0644
   with_filetree:
     - "{{ mysql_extra_conf_playbook_path }}/"
   when: item.state == "file"
@@ -54,9 +55,9 @@
   template:
     src: "{{ item.src }}"
     dest: "{{ mysql_extra_conf_include_dir }}/{{ item.path | splitext | first }}"  # This is to remove .j2 extension
-    owner: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
-    mode: 0600
+    owner: root
+    group: root
+    mode: 0644
   with_filetree:
     - "{{ mysql_extra_conf_template_playbook_path }}/"
   when: item.state == "file"
@@ -68,11 +69,20 @@
     state: directory
     owner: "{{ mysql_user }}"
     group: "{{ mysql_group }}"
+    mode: 0750
+
+- name: MySQL | Check if datadir is initialized
+  command: ls "{{ mysql_datadir }}/mysql"
+  register: ls_datadir
+  ignore_errors: true
+  changed_when: false
 
 - name: MySQL | Trying to initialize datadir
   command: /usr/sbin/mysqld --initialize-insecure --user={{ mysql_user }}
+  register: result
   ignore_errors: true
-  changed_when: false
+  changed_when: result.rc == 0
+  when: ls_datadir.stdout | length == 0
 
 - name: MySQL | Ensure MySQL is started and enabled on boot
   service:
