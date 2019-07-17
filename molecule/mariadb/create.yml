@@ -12,7 +12,7 @@
   tasks:
     - name: Create Dockerfiles from image names
       template:
-        src: "{{ molecule_scenario_directory }}/Dockerfile.j2"
+        src: Dockerfile.j2
         dest: "{{ molecule_ephemeral_directory }}/Dockerfile_{{ item.image | regex_replace('[^a-zA-Z0-9_]', '_') }}"
       with_items: "{{ molecule_yml.platforms }}"
       register: platforms
@@ -54,7 +54,10 @@
         published_ports: "{{ item.published_ports | default(omit) }}"
         ulimits: "{{ item.ulimits | default(omit) }}"
         networks: "{{ item.networks | default(omit) }}"
+        purge_networks: "{{ item.purge_networks | default(omit) }}"
         dns_servers: "{{ item.dns_servers | default(omit) }}"
+        tmpfs: "{{ item.tmpfs | default(omit) }}"
+        devices: "{{ item.devices | default(omit) }}"
       register: server
       with_items: "{{ molecule_yml.platforms }}"
       async: 7200

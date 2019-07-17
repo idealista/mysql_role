@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: mariadb
+    groups:
+      - mariadb_group
+    image: geerlingguy/docker-debian9-ansible:latest
+    privileged: false
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+      - '/sys/fs/fuse/connections:/sys/fs/fuse/connections:ro'
+      - '/dev/hugepages:/dev/hugepages'
+    tmpfs:
+      - '/tmp'
+      - '/run'
+      - '/run/lock'
+    devices:
+      - '/dev/fuse:/dev/fuse'
+    command: '/lib/systemd/systemd'
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: mariadb
+verifier:
+  name: goss
+  lint:
+    name: yamllint

@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/idealista/mysql_role.png)](https://travis-ci.org/idealista/mysql_role)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-idealista.mysql__role-B62682.svg)](https://galaxy.ansible.com/idealista/mysql_role)
 
-This ansible role installs a Prometheus Node Exporter in a debian environment.
+This ansible role installs an Oracle MySQL or MariaDB server in a debian environment.
 
 - [Getting Started](#getting-started)
 	- [Prerequisities](#prerequisities)
@@ -20,11 +20,11 @@ This ansible role installs a Prometheus Node Exporter in a debian environment.
 
 ## Getting Started
 
-These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) in a Debian system.
+These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) or [MariaDB server](https://mariadb.org/) in a Debian system.
 
 ### Prerequisities
 
-Ansible 2.4.3.0 version installed.
+Ansible 2.7.9.0 version installed.
 Inventory destination should be a Debian environment.
 
 For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 1.0.0
+  version: 3.0.0
   name: mysql
 ```
 
@@ -89,16 +89,17 @@ mysql_users:
 ## Testing
 
 ```
-$ pipenv install -r test-requirements.txt -python 2.7
+$ pipenv sync
+$ pipenv run molecule test --all
 ```
 
-To check the installation
+To check the installation, example with Oracle's MySQL implementation:
 
 ```bash
-$ pipenv run molecule converge
-$ pipenv run molecule login
+$ pipenv run molecule converge --scenario-name=mysql
+$ pipenv run molecule login --scenario-name=mysql
 
-vagrant@mysql:~$ mysql -u root -ptesting
+root@mysql:/# mysql -u root -ptesting
 
 mysql> show databases;
 +--------------------+
@@ -106,7 +107,7 @@ mysql> show databases;
 +--------------------+
 | information_schema |
 | mysql              |
-| mysql_test         |
+| test01             |
 | performance_schema |
 +--------------------+
 4 rows in set (0.00 sec)
@@ -114,8 +115,8 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-2.4.3.0-green.svg)
-![Molecule](https://img.shields.io/badge/molecule-2.10.1-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-2.7.9.0-green.svg)
+![Molecule](https://img.shields.io/badge/molecule-2.20.0-green.svg)
 ![Goss](https://img.shields.io/badge/goss-0.3.5-green.svg)
 
 ## Versioning

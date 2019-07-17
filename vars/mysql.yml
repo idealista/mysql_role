@@ -3,6 +3,8 @@
 mysql_deb_package: "mysql-apt-config_{{ mysql_config_version }}_all.deb"
 mysql_deb_repo: "http://dev.mysql.com/get/{{ mysql_deb_package }}"
 
+mysql_config_version: 0.8.6-1
+
 mysql_required_libs:
   - python-mysqldb
 

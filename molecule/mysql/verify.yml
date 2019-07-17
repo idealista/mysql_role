@@ -21,7 +21,7 @@
 
   vars_files:
     - ../../defaults/main.yml
-    - ../../vars/main.yml
+    - ../../vars/mysql.yml
     - ./group_vars/mysql_group.yml
 
   tasks:
