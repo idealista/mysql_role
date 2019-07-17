@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 2.0.0
+  version: 3.0.0
   name: mysql
 ```
 
