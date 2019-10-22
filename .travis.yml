@@ -9,6 +9,7 @@ install:
   - pip install pipenv
   - pipenv sync
 script:
+  - docker --version
   - pipenv run molecule test --all
 
 notifications:
