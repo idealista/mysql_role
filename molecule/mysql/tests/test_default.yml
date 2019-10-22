@@ -10,7 +10,7 @@ user:
       - {{ mysql_group }}
 
 file:
-  {{mysql_pid_file}}
+  {{mysql_pid_file}}:
     owner: {{ mysql_user }}
     group: {{ mysql_group }}
     exists: true
