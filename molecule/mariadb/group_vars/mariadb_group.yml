@@ -15,3 +15,5 @@ mysql_users:
       - test01.*:ALL
 
 mysql_datadir: /var/lib/mysql
+
+mysql_remount_run: false
