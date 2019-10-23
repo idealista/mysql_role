@@ -5,7 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a ch
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
 ### Fixed 
-- [#12-new](https://github.com/idealista/mysql_role/pull/12-new) *Tests to confirm configuration was applied added* @dgalcantara
+- [#12](https://github.com/idealista/mysql_role/pull/12-new) *Remount task removed due known problems, explained in readme in case need to be used*
+- [#12](https://github.com/idealista/mysql_role/pull/12-new) *Tests to confirm configuration was applied added* @dgalcantara
+
 ## [3.0.0](https://github.com/idealista/mysql_role/tree/3.0.0) (17/07/2019)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/2.2.1...3.0.0)
 ### Fixed 
