@@ -7,6 +7,16 @@
     pkg: "{{ mysql_required_libs }}"
     state: present
 
+- name: MySQL | Add Repo Key
+  apt_key:
+    url: "{{ mysql_key_url }}"
+    state: present
+  
+- name: MySQL | Add MariaDB Repository
+  apt_repository:
+    repo: "{{ mysql_repository_url }}"
+    state: present  
+
 - name: MySQL | Update cache
   apt:
     update_cache: true
