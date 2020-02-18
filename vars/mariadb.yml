@@ -8,5 +8,5 @@ mysql_packages:
   - mysql-common
   - mariadb-server
 
-  mysql_key_url: https://packages.sury.org/php/apt.gpg
-  mysql_repository_url: 'deb [arch=amd64,i386,ppc64el] http://mirror.23media.de/mariadb/repo/{{ mysql_version }}/debian {{ ansible_distribution_release }} main'
+mysql_key_url: https://mariadb.org/mariadb_release_signing_key.asc
+mysql_repository_url: 'deb [arch=amd64,i386,ppc64el] http://mirror.23media.de/mariadb/repo/{{ mysql_version }}/debian {{ ansible_distribution_release }} main'
