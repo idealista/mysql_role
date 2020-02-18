@@ -4,6 +4,9 @@ mysql_flavour: mysql
 # Alt option:
 # mysql_flavour: mariadb
 
+mysql_version: 0.8.6-1
+#mysql_version: 10.4
+
 mysql_user: mysql
 mysql_group: mysql
 
