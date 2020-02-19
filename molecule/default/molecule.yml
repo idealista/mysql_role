@@ -6,13 +6,26 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
-    image: centos:7
+  - name: mysql
+    groups:
+      - mysql
+    image: ${DOCKER_BASE_IMAGE:-debian:stretch-slim}
+    privileged: true
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+    tmpfs:
+      - /run
+      - /run/lock
+    command: '/lib/systemd/systemd'
+    stop_signal: 'RTMIN+3'
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
 verifier:
-  name: testinfra
+  name: goss
   lint:
-    name: flake8
+    name: yamllint
+    enabled: false

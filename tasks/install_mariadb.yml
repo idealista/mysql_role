@@ -11,11 +11,11 @@
   apt_key:
     url: "{{ mysql_key_url }}"
     state: present
-  
+
 - name: MySQL | Add MariaDB Repository
   apt_repository:
     repo: "{{ mysql_repository_url }}"
-    state: present  
+    state: present
 
 - name: MySQL | Update cache
   apt:
