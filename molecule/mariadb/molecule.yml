@@ -6,31 +6,26 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: mariadb
+  - name: mysql
     groups:
-      - mariadb_group
-    image: geerlingguy/docker-debian9-ansible:latest
-    privileged: false
+      - mysql
+    image: ${DOCKER_BASE_IMAGE:-debian:stretch-slim}
+    privileged: true
     capabilities:
       - SYS_ADMIN
     volumes:
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      - '/sys/fs/fuse/connections:/sys/fs/fuse/connections:ro'
-      - '/dev/hugepages:/dev/hugepages'
     tmpfs:
-      - '/tmp'
-      - '/run'
-      - '/run/lock'
-    devices:
-      - '/dev/fuse:/dev/fuse'
+      - /run
+      - /run/lock
     command: '/lib/systemd/systemd'
+    stop_signal: 'RTMIN+3'
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
-scenario:
-  name: mariadb
 verifier:
   name: goss
   lint:
     name: yamllint
+    enabled: false
