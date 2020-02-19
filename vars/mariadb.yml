@@ -1,7 +1,7 @@
 ---
 mysql_required_libs:
   - python-mysqldb
-  - software-properties-common 
+  - software-properties-common
   - dirmngr
 
 mysql_packages:
