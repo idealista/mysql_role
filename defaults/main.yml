@@ -12,6 +12,12 @@ mysql_group: mysql
 mysql_service_enabled: true
 # current state: started, stopped
 mysql_service_state: started
+# The values below are the ones by default. To change the value of any of these options uncomment it and modify it.
+# mysql_private_tmp: false
+# mysql_private_network: false
+# mysql_private_devices: true
+# mysql_protect_system: full
+# mysql_protect_home: true
 
 # Files & Paths
 mysql_config_file: /etc/mysql/my.cnf
