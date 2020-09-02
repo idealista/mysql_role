@@ -37,7 +37,7 @@ Restart=on-failure
 RestartPreventExitStatus=1
 RuntimeDirectory=mysqld
 RuntimeDirectoryMode=755
-PrivateTmp={{ mysql_PrivateTmp | default('false') }}
+PrivateTmp={{ mysql_private_tmp | default('false') }}
 
 # Setting this to true can break replication and the Type=notify settings
 # See also bind-address mysqld option.

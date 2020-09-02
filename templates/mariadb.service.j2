@@ -125,7 +125,7 @@ BlockIOWeight={{ mysqld_BlockIOWeight }}
 
 # If you don't use the /tmp directory for SELECT ... OUTFILE and
 # LOAD DATA INFILE you can enable PrivateTmp=true for a little more security.
-PrivateTmp={{ mysql_PrivateTmp | default('false') }}
+PrivateTmp={{ mysql_private_tmp | default('false') }}
 
 ##
 ## Options previously available to be set via [mysqld_safe]
