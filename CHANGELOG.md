@@ -4,8 +4,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
-## [3.0.1](https://github.com/idealista/mysql_role/tree/3.0.1) (01/09/2020)
-[Full Changelog](https://github.com/idealista/mysql_role/compare/3.0.0...3.0.1)
+### Changed
+- [#61](https://github.com/idealista/mysql_role/issues/61) *Parametrize more options in services* @pablogcaldito
+
 ### Fixed
 - [#57](https://github.com/idealista/mysql_role/issues/57) *Fix debian 10 issue ensuring service is started on boot* @pablogcaldito
 

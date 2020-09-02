@@ -35,7 +35,7 @@ Type=notify
 
 # Setting this to true can break replication and the Type=notify settings
 # See also bind-address mysqld option.
-PrivateNetwork=false
+PrivateNetwork={{ mysql_private_network | default('false') }}
 
 ##############################################################################
 ## Package maintainers
@@ -48,15 +48,15 @@ Group={{ mysql_group }}
 CapabilityBoundingSet=CAP_IPC_LOCK
 
 # Prevent writes to /usr, /boot, and /etc
-ProtectSystem=full
+ProtectSystem={{ mysql_protect_system | default('full') }}
 
 # Doesn't yet work properly with SELinux enabled
 # NoNewPrivileges=true
 
-PrivateDevices=true
+PrivateDevices={{ mysql_private_devices | default('true') }}
 
 # Prevent accessing /home, /root and /run/user
-ProtectHome=true
+ProtectHome={{ mysql_protect_home | default('true') }}
 
 # Execute pre and post scripts as root, otherwise it does it as User=
 PermissionsStartOnly=true
