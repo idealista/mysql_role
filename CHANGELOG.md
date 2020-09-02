@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
-### Fixed 
+
+### Changed
+- [#61](https://github.com/idealista/mysql_role/issues/61) *Parametrize more options in services* @pablogcaldito
+
+### Fixed
+- [#57](https://github.com/idealista/mysql_role/issues/57) *Fix debian 10 issue ensuring service is started on boot* @pablogcaldito
 - [#12](https://github.com/idealista/mysql_role/pull/12-new) *Remount task removed due known problems, explained in readme in case need to be used*
 - [#12](https://github.com/idealista/mysql_role/pull/12-new) *Tests to confirm configuration was applied added* @dgalcantara
 
