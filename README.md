@@ -56,6 +56,7 @@ Use in a playbook:
 
 ## Usage
 
+
 Installation tasks follows the install guide: https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
 
 Look to the [defaults](defaults/main.yml) properties file to see the possible configuration properties.
@@ -112,6 +113,18 @@ mysql> show databases;
 +--------------------+
 4 rows in set (0.00 sec)
 ```
+
+ ## Known Issues
+  There is a problem while trying to remount /run using the role. If you need to assign a new size for mysql use this in your playbook
+```yaml
+- name: MySQL | Remounting /run
+  shell: mount -t tmpfs tmpfs /run -o remount,size={{ mysql_remount_run_partition_size }}
+  changed_when: false
+  tags:
+    skip_ansible_lint
+  when: mysql_remount_run
+```
+
 
 ## Built With
 

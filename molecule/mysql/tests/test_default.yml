@@ -10,6 +10,18 @@ user:
       - {{ mysql_group }}
 
 file:
+  {{mysql_pid_file}}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: file
+    mode: "0640"
+  {{ mysql_datadir }}:
+    owner: {{ mysql_user }}
+    group: {{ mysql_group }}
+    exists: true
+    filetype: directory
+    mode: "0750"
   {{ mysql_config_file }}:
     owner: root
     group: root
