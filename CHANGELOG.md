@@ -4,7 +4,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
-
+## [4.0.0](https://github.com/idealista/mysql_role/tree/4.0.0) (17/07/2019)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/3.0.0...4.0.0)
 ### Changed
 - [#61](https://github.com/idealista/mysql_role/issues/61) *Parametrize more options in services* @pablogcaldito
 
