@@ -37,3 +37,16 @@ Restart=on-failure
 RestartPreventExitStatus=1
 RuntimeDirectory=mysqld
 RuntimeDirectoryMode=755
+PrivateTmp={{ mysql_private_tmp | default('false') }}
+
+# Setting this to true can break replication and the Type=notify settings
+# See also bind-address mysqld option.
+PrivateNetwork={{ mysql_private_network | default('false') }}
+
+PrivateDevices={{ mysql_private_devices | default('true') }}
+
+# Prevent writes to /usr, /boot, and /etc
+ProtectSystem={{ mysql_protect_system | default('full') }}
+
+# Prevent accessing /home, /root and /run/user
+ProtectHome={{ mysql_protect_home | default('true') }}

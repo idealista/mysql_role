@@ -89,6 +89,7 @@
     name: mysql
     state: started
     enabled: true
+    daemon_reload: true
 
 - name: MySQL | Flush handlers to restart MySQL after previous initialization
   meta: flush_handlers
