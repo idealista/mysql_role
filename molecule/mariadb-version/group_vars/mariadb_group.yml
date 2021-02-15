@@ -1,0 +1,20 @@
+---
+
+mysql_flavour: mariadb
+mysql_version: 10.5
+mysql_key_url: https://mariadb.org/mariadb_release_signing_key.asc
+mysql_repository_url: 'deb [arch=amd64,i386,ppc64el] http://mirror.23media.de/mariadb/repo/{{ mysql_version }}/debian {{ ansible_distribution_release }} main'
+mysql_packages:
+  - mariadb-server
+
+mysql_databases:
+  - name: test01
+    encoding: utf8
+
+mysql_users:
+  - name: testing
+    password: testing
+    priv:
+      - test01.*:ALL
+
+mysql_datadir: /var/lib/mysql
