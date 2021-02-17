@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
+
+## [4.1.0](https://github.com/idealista/mysql_role/tree/4.1.0)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.0.0...4.1.0)
+### Added
+- [#64](https://github.com/idealista/mysql_role/issues/64) *[FEATURE] parameterize mariadb/mysql version to install* @emepege
+- [#59](https://github.com/idealista/mysql_role/issues/59) *Travis and molecule tests should be improved* @emepege
 ## [4.0.0](https://github.com/idealista/mysql_role/tree/4.0.0) (17/07/2019)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/3.0.0...4.0.0)
 ### Changed
