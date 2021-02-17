@@ -2,7 +2,7 @@
 
 # MySQL Ansible role
 
-[![Build Status](https://travis-ci.org/idealista/mysql_role.png)](https://travis-ci.org/idealista/mysql_role)
+[![Build Status](https://travis-ci.com/idealista/mysql_role.png)](https://travis-ci.com/idealista/mysql_role)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-idealista.mysql__role-B62682.svg)](https://galaxy.ansible.com/idealista/mysql_role)
 
 This ansible role installs an Oracle MySQL or MariaDB server in a debian environment.
@@ -24,7 +24,7 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 
 ### Prerequisities
 
-Ansible 2.7.9.0 version installed.
+Ansible 2.9.9 version installed.
 Inventory destination should be a Debian environment.
 
 For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 3.0.0
+  version: 4.1.0
   name: mysql
 ```
 
@@ -128,9 +128,9 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-2.7.9.0-green.svg)
-![Molecule](https://img.shields.io/badge/molecule-2.20.0-green.svg)
-![Goss](https://img.shields.io/badge/goss-0.3.5-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-2.9.9-green.svg)
+![Molecule](https://img.shields.io/badge/molecule-3.0.4-green.svg)
+![Goss](https://img.shields.io/badge/goss-0.3.16-green.svg)
 
 ## Versioning
 
