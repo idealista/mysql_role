@@ -3,27 +3,25 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  yamllint .
+  ansible-lint .
 platforms:
   - name: mariadb
     groups:
       - mariadb_group
-    image: geerlingguy/docker-debian9-ansible:latest
-    privileged: false
+    image: ${MOLECULE_DISTRO:-debian:stretch-slim}
+    privileged: true
     capabilities:
       - SYS_ADMIN
     volumes:
       - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
-      - '/sys/fs/fuse/connections:/sys/fs/fuse/connections:ro'
-      - '/dev/hugepages:/dev/hugepages'
     tmpfs:
-      - '/tmp'
-      - '/run'
-      - '/run/lock'
-    devices:
-      - '/dev/fuse:/dev/fuse'
+      - /tmp
+      - /run
+      - /run/lock
     command: '/lib/systemd/systemd'
+    stop_signal: 'RTMIN+3'
 provisioner:
   name: ansible
   lint:
@@ -31,6 +29,4 @@ provisioner:
 scenario:
   name: mariadb
 verifier:
-  name: goss
-  lint:
-    name: yamllint
+  name: ansible

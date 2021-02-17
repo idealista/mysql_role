@@ -1,4 +1,5 @@
 ---
+mysql_version: 0.8.6-1
 mysql_databases:
   - name: test01
     encoding: utf8

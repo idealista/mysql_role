@@ -7,10 +7,10 @@ lint: |
   yamllint .
   ansible-lint .
 platforms:
-  - name: mysql
+  - name: mariadb
     groups:
-      - mysql_group
-    image: ${MOLECULE_DISTRO:-debian:stretch-slim}
+      - mariadb_group
+    image: ${MOLECULE_DISTRO:-debian:buster-slim}
     privileged: true
     capabilities:
       - SYS_ADMIN
@@ -27,6 +27,6 @@ provisioner:
   lint:
     name: ansible-lint
 scenario:
-  name: mysql
+  name: mariadb-version
 verifier:
   name: ansible
