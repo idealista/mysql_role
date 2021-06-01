@@ -24,8 +24,6 @@ platforms:
     stop_signal: 'RTMIN+3'
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 scenario:
   name: mysql
 verifier:
