@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a ch
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
 
+### Added
+- [#70](https://github.com/idealista/mysql_role/issues/70) *[FEATURE] Role reshaping* @marcelogalmor
+
 ## [4.1.0](https://github.com/idealista/mysql_role/tree/4.1.0)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.0.0...4.1.0)
 ### Added
