@@ -1,7 +1,7 @@
 ---
 dist: stretch
 language: python
-python: "3.7"
+python: "3.9"
 sudo: required
 services:
   - docker
@@ -17,3 +17,9 @@ script:
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  email:
+    if: branch = main
+    on_success: change
+    on_failure: always
+    recipients:
+      - desarrollo.benders@idealista.com
