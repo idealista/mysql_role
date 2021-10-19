@@ -2,6 +2,13 @@
 - name: MySQL | Gather OS specific variables
   include_vars: "{{ mysql_flavour }}.yml"
 
+- name: MySQL | Gather flavour OS specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ mysql_flavour }}-{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+      skip: true
+
 - name: MySQL | Installing dependencies
   apt:
     pkg: "{{ mysql_required_libs }}"

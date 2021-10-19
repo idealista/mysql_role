@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
 ## [Unreleased](https://github.com/idealista/mysql_role/tree/develop)
+### Added
+- [#76](https://github.com/idealista/mysql_role/issues/70) *[FEATURE] Add Debian11 support* @vsuarez
+### Changed
+- Drop stretch support.
 
 ## [4.1.1](https://github.com/idealista/mysql_role/tree/4.1.1)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.1.0...4.1.1)

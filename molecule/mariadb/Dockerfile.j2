@@ -8,8 +8,16 @@ FROM {{ item.image }}
 
 RUN mkdir -p /usr/share/man/man1
 
+# install minimal packages for debian slim images
+{% if item.image == 'debian:bullseye-slim' %}
 RUN apt-get update && \
-    apt-get install -y iproute2 sudo systemd systemd-sysv python python-setuptools ssh cron locales ca-certificates && \
+    apt-get install -y python3 sudo bash ca-certificates iproute2 systemd systemd-sysv python3-pip && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 0 &&\
     apt-get clean
+{% else %}
+RUN apt-get update && \
+    apt-get install -y python sudo bash ca-certificates iproute2 systemd systemd-sysv python-pip && \
+    apt-get clean
+{% endif %}
 
 RUN systemctl mask getty.target 

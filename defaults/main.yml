@@ -4,7 +4,8 @@ mysql_flavour: mysql
 # Alt option:
 # mysql_flavour: mariadb
 
-mysql_version: 0.8.6-1
+mysql_version: 0.8.19-1
+
 # Alt option for mariadb:
 # mysql_version: 10.5
 # mysql_key_url: https://mariadb.org/mariadb_release_signing_key.asc
@@ -29,6 +30,7 @@ mysql_service_state: started
 mysql_config_file: /etc/mysql/my.cnf
 mysql_pid_file: /var/run/mysqld/mysqld.pid
 mysql_datadir: /var/lib/mysql
+mysql_share_dir: /usr/share/mysql-8.0
 
 # Allowing playbooks to provide external option files
 mysql_extra_conf_include_dir: /etc/mysql/conf.d
@@ -78,7 +80,7 @@ mysql_global_variables:
       basedir: /usr/
       tmpdir: /tmp
       datadir: "{{ mysql_datadir }}"
-      lc_messages_dir: /usr/share/mysql
+      lc_messages_dir: "{{ mysql_share_dir }}"
       pid_file: "{{ mysql_pid_file }}"
       slow_launch_time: 2
       key_buffer_size: 256M
@@ -90,7 +92,7 @@ mysql_global_variables:
       thread_cache_size: 8
       max_connections: 151
       wait_timeout: 28800
-      sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+      sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
       innodb_file_per_table: "ON"
       innodb_buffer_pool_size: 256M
       innodb_flush_log_at_trx_commit: 1
@@ -98,7 +100,6 @@ mysql_global_variables:
       innodb_log_file_size: 64M
       innodb_log_buffer_size: 8M
       general_log_file: /var/log/mysql/mysql.log
-      log_syslog_tag: mysql
       slow_query_log_file: /var/log/mysql/mysql-slow.log
       slow_query_log: "ON"
     mysqldump:

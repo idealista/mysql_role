@@ -18,4 +18,4 @@
     priv: "{{  item.priv | default(['*.*:USAGE']) | join('/') }}"
     append_privs: true
   with_items: "{{ mysql_users }}"
-  no_log: true
+  no_log: false
