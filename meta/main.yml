@@ -10,8 +10,8 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - jessie
-        - stretch
+        - buster
+        - bullseye
   galaxy_tags:
     - database
     - mysql
