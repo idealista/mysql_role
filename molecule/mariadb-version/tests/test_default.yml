@@ -64,8 +64,6 @@ port:
     listening: true
 
 package:
-  python-mysqldb:
-    installed: true
   mysql-common:
     installed: true
   mariadb-server:

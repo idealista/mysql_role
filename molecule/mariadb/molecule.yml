@@ -10,7 +10,7 @@ platforms:
   - name: mariadb
     groups:
       - mariadb_group
-    image: ${MOLECULE_DISTRO:-debian:stretch-slim}
+    image: ${MOLECULE_DISTRO:-debian:bullseye-slim}
     privileged: true
     capabilities:
       - SYS_ADMIN
