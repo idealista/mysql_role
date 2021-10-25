@@ -1,7 +1,17 @@
 ---
 
-- name: MySQL | Gather OS specific variables
+- name: MySQL | Gather flavour specific variables
   include_vars: "{{ mysql_flavour }}.yml"
+  with_first_found:
+    - "{{ mysql_flavour }}.yml"
+    - "{{ mysql_flavour }}-{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+
+- name: MySQL | Gather flavour OS specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ mysql_flavour }}-{{ ansible_distribution }}{{ ansible_distribution_major_version }}.yml"
+      skip: true
 
 - name: MySQL | Installing dependencies
   apt:
@@ -20,8 +30,8 @@
 
 - name: MySQL | Fix Oracle s GPG key
   apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: A4A9406876FCBD3C456770C88C718D3B5072E1F5
+    keyserver: "{{ mysql_oracle_gpg_keyserver }}"
+    id: "{{ mysql_oracle_gpg_key }}"
 
 - name: MySQL | Update cache
   apt:

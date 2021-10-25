@@ -77,8 +77,6 @@ port:
     listening: true
 
 package:
-  python-mysqldb:
-    installed: true
   mysql-common:
     installed: true
   mysql-server:
