@@ -3,12 +3,6 @@
 mysql_deb_package: "mysql-apt-config_{{ mysql_version }}_all.deb"
 mysql_deb_repo: "http://dev.mysql.com/get/{{ mysql_deb_package }}"
 
-mysql_oracle_gpg_keyserver: keyserver.ubuntu.com
-mysql_oracle_gpg_key: A4A9406876FCBD3C456770C88C718D3B5072E1F5
-
-mysql_required_libs:
-  - python-mysqldb
-
 mysql_packages:
   - mysql-common
   - mysql-server

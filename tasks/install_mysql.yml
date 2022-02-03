@@ -28,10 +28,11 @@
   apt:
     deb: "/usr/src/{{ mysql_deb_package }}"
 
-- name: MySQL | Fix Oracle s GPG key
+- name: MySQL | Add Oracle repo GPG key
   apt_key:
     keyserver: "{{ mysql_oracle_gpg_keyserver }}"
     id: "{{ mysql_oracle_gpg_key }}"
+    state: present
 
 - name: MySQL | Update cache
   apt:
