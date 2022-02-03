@@ -6,6 +6,12 @@ mysql_flavour: mysql
 
 mysql_version: 0.8.19-1
 
+mysql_oracle_gpg_keyserver: keyserver.ubuntu.com
+mysql_oracle_gpg_key: 467B942D3A79BD29
+
+mysql_required_libs:
+    - python3-mysqldb
+
 # Alt option for mariadb:
 # mysql_version: 10.5
 # mysql_key_url: https://mariadb.org/mariadb_release_signing_key.asc
@@ -65,47 +71,47 @@ mysql_remount_run_partition_size: 512M
 ## to show available system variables or check
 ## https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html
 mysql_global_variables:
-  include_dirs:
-    - "{{ mysql_extra_conf_include_dir }}"
-  groups:
-    client:
-      user: "{{ mysql_user }}"
-      password: "{{ mysql_root_password }}"
-      port: 3306
-      socket: /var/run/mysqld/mysqld.sock
-    mysqld:
-      port: 3306
-      bind_address: 0.0.0.0
-      socket: /var/run/mysqld/mysqld.sock
-      basedir: /usr/
-      tmpdir: /tmp
-      datadir: "{{ mysql_datadir }}"
-      lc_messages_dir: "{{ mysql_share_dir }}"
-      pid_file: "{{ mysql_pid_file }}"
-      slow_launch_time: 2
-      key_buffer_size: 256M
-      max_allowed_packet: 64M
-      table_open_cache: 256
-      sort_buffer_size: 1M
-      read_buffer_size: 1M
-      read_rnd_buffer_size: 4M
-      thread_cache_size: 8
-      max_connections: 151
-      wait_timeout: 28800
-      sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
-      innodb_file_per_table: "ON"
-      innodb_buffer_pool_size: 256M
-      innodb_flush_log_at_trx_commit: 1
-      innodb_lock_wait_timeout: 50
-      innodb_log_file_size: 64M
-      innodb_log_buffer_size: 8M
-      general_log_file: /var/log/mysql/mysql.log
-      slow_query_log_file: /var/log/mysql/mysql-slow.log
-      slow_query_log: "ON"
-    mysqldump:
-      quick: 1
-      max_allowed_packet: 64M
-    mysql_safe:
-      pid_file: "{{ mysql_pid_file }}"
-      socket: /var/run/mysqld/mysqld.sock
-      nice: 0
+    include_dirs:
+        - "{{ mysql_extra_conf_include_dir }}"
+    groups:
+        client:
+            user: "{{ mysql_user }}"
+            password: "{{ mysql_root_password }}"
+            port: 3306
+            socket: /var/run/mysqld/mysqld.sock
+        mysqld:
+            port: 3306
+            bind_address: 0.0.0.0
+            socket: /var/run/mysqld/mysqld.sock
+            basedir: /usr/
+            tmpdir: /tmp
+            datadir: "{{ mysql_datadir }}"
+            lc_messages_dir: "{{ mysql_share_dir }}"
+            pid_file: "{{ mysql_pid_file }}"
+            slow_launch_time: 2
+            key_buffer_size: 256M
+            max_allowed_packet: 64M
+            table_open_cache: 256
+            sort_buffer_size: 1M
+            read_buffer_size: 1M
+            read_rnd_buffer_size: 4M
+            thread_cache_size: 8
+            max_connections: 151
+            wait_timeout: 28800
+            sql_mode: ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+            innodb_file_per_table: "ON"
+            innodb_buffer_pool_size: 256M
+            innodb_flush_log_at_trx_commit: 1
+            innodb_lock_wait_timeout: 50
+            innodb_log_file_size: 64M
+            innodb_log_buffer_size: 8M
+            general_log_file: /var/log/mysql/mysql.log
+            slow_query_log_file: /var/log/mysql/mysql-slow.log
+            slow_query_log: "ON"
+        mysqldump:
+            quick: 1
+            max_allowed_packet: 64M
+        mysql_safe:
+            pid_file: "{{ mysql_pid_file }}"
+            socket: /var/run/mysqld/mysqld.sock
+            nice: 0

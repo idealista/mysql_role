@@ -24,7 +24,7 @@ These instructions will get you a copy of the role for your Ansible playbook. On
 
 ### Prerequisities
 
-Ansible 4.0.0 version installed.
+Ansible >= 2.9 version installed.
 Inventory destination should be a Debian environment.
 
 For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 4.1.0
+  version: 4.3.0
   name: mysql
 ```
 
@@ -128,8 +128,8 @@ mysql> show databases;
 
 ## Built With
 
-![Ansible](https://img.shields.io/badge/ansible-4.0.0-green.svg)
-![Molecule](https://img.shields.io/badge/molecule-3.3.2-green.svg)
+![Ansible](https://img.shields.io/badge/ansible-5.2.0-green.svg)
+![Molecule](https://img.shields.io/badge/molecule-3.4.2-green.svg)
 ![Goss](https://img.shields.io/badge/goss-0.3.16-green.svg)
 
 ## Versioning

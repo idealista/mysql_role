@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
+## [4.3.0](https://github.com/idealista/mysql_role/tree/4.3.0)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.2.0...4.3.0)
+### Fixed
+- [#79](https://github.com/idealista/mysql_role/issues/79) *Fixed .my.cnf template* @frantsao
+### Added
+- [#79](https://github.com/idealista/mysql_role/issues/79) *Improved python3 support in tests* @frantsao
+- [#79](https://github.com/idealista/mysql_role/issues/79) *Updated tests dependencies* @frantsao
+
 ## [4.2.0](https://github.com/idealista/mysql_role/tree/4.2.0)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.1.1...4.2.0)
 ### Added
