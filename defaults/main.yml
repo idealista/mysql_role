@@ -7,7 +7,7 @@ mysql_flavour: mysql
 mysql_version: 0.8.19-1
 
 # If looking for an specific mysql version:
-mysql_server_version: mysql-5.7
+# mysql_server_version: mysql-5.7
 
 mysql_oracle_gpg_keyserver: keyserver.ubuntu.com
 mysql_oracle_gpg_key: 467B942D3A79BD29
