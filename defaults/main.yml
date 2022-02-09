@@ -39,7 +39,7 @@ mysql_service_state: started
 mysql_config_file: /etc/mysql/my.cnf
 mysql_pid_file: /var/run/mysqld/mysqld.pid
 mysql_datadir: /var/lib/mysql
-mysql_share_dir: /usr/share/mysql  # /usr/share/mysql for mysql 5
+mysql_share_dir: /usr/share/mysql-8.0  # /usr/share/mysql for mysql 5
 
 # Allowing playbooks to provide external option files
 mysql_extra_conf_include_dir: /etc/mysql/conf.d
