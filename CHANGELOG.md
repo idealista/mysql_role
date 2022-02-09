@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
+## Unreleased
+### Added
+- [#82](https://github.com/idealista/mysql_role/issues/82) *Provide options to install non-default mysql versions* @blalop
+
 ## [4.3.0](https://github.com/idealista/mysql_role/tree/4.3.0)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.2.0...4.3.0)
 ### Fixed

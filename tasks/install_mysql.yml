@@ -18,6 +18,14 @@
     pkg: "{{ mysql_required_libs }}"
     state: present
 
+- name: MySQL | Set MySQL server version
+  debconf:
+    name: mysql-apt-config
+    question: mysql-apt-config/select-server
+    vtype: select
+    value: "{{ mysql_server_version }}"
+  when: mysql_server_version is defined
+
 - name: MySQL | Download MySQL config deb
   get_url:
     url: "{{ mysql_deb_repo }}"
