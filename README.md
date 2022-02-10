@@ -87,6 +87,10 @@ mysql_users:
      priv: [ example_DB.*:ALL ]
 ```
 
+### Selecting a major release version
+
+Major releases of MySQL can be selected using `mysql_server_version`. You can see the available options in the MySQL Debian mirror.
+
 ## Testing
 
 ```
