@@ -36,6 +36,8 @@ mysql_service_state: started
 # mysql_protect_home: true
 
 # Files & Paths
+mysql_config_template: my.cnf.j2
+mysql_service_template: "{{ mysql_flavour }}.service.j2"
 mysql_config_file: /etc/mysql/my.cnf
 mysql_pid_file: /var/run/mysqld/mysqld.pid
 mysql_datadir: /var/lib/mysql

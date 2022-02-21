@@ -32,7 +32,7 @@ PIDFile={{ mysql_pid_file }}
 ExecStartPre={{ mysql_share_dir }}/mysql-systemd-start pre
 ExecStart=/usr/sbin/mysqld --defaults-file={{ mysql_config_file }} --daemonize --pid-file={{ mysql_pid_file }}
 TimeoutSec=600
-LimitNOFILE=5000
+LimitNOFILE={{ mysqld_service_LimitNOFILE|default('5000') }}
 Restart=on-failure
 RestartPreventExitStatus=1
 RuntimeDirectory=mysqld
