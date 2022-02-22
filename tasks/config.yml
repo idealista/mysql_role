@@ -2,7 +2,7 @@
 
 - name: MySQL | Copy MySQL service config
   template:
-    src: "{{ mysql_flavour }}.service.j2"
+    src: "{{ mysql_service_template }}"
     dest: "/lib/systemd/system/{{ mysql_flavour }}.service"
     owner: root
     group: root
@@ -11,7 +11,7 @@
 
 - name: MySQL | Copy global MySQL configuration
   template:
-    src: my.cnf.j2
+    src: "{{ mysql_config_template }}"
     dest: "{{ mysql_config_file }}"
     owner: root
     group: root

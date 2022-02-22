@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 
+## [4.5.0](https://github.com/idealista/mysql_role/tree/4.5.0)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.4.0...4.5.0)
+### Added
+- [#85](https://github.com/idealista/mysql_role/issues/85) *Replaced hardcoded filenames by variables in config tasks; small improvement in mysql.service template* @frantsao
+### Fixed
+- [#85](https://github.com/idealista/mysql_role/issues/85) *Fix no_log in user creation* @frantsao
+
 ## Unreleased
 
 ## [4.4.0](https://github.com/idealista/mysql_role/tree/4.4.0)

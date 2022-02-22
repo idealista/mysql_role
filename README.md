@@ -2,7 +2,7 @@
 
 # MySQL Ansible role
 
-[![Build Status](https://travis-ci.com/idealista/mysql_role.png)](https://travis-ci.com/idealista/mysql_role)
+[![Build Status](https://travis-ci.org/idealista/mysql_role.png)](https://travis-ci.org/idealista/mysql_role)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-idealista.mysql__role-B62682.svg)](https://galaxy.ansible.com/idealista/mysql_role)
 
 This ansible role installs an Oracle MySQL or MariaDB server in a debian environment.
@@ -35,7 +35,7 @@ Create or add to your roles dependency file (e.g requirements.yml):
 
 ```
 - src: idealista.mysql_role
-  version: 4.3.0
+  version: 4.5.0
   name: mysql
 ```
 
