@@ -2,7 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
-
+## [4.5.1](https://github.com/idealista/mysql_role/tree/4.5.1)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.0...4.5.1)
+### Fixed
+- [#88](https://github.com/idealista/mysql_role/issues/88) *Fix password-less root user creation* @santi-eidu
 ## [4.5.0](https://github.com/idealista/mysql_role/tree/4.5.0)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.4.0...4.5.0)
 ### Added

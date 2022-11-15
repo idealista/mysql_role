@@ -4,8 +4,8 @@
   mysql_user:
     name: "{{ mysql_root_user }}"
     password: "{{ mysql_root_password }}"
-    login_user: root
-    login_host: localhost
+    login_unix_socket: '/var/run/mysqld/mysqld.sock'
+    host: 'localhost'
   when: "installed_mysql.stdout != 'Status: install ok installed'"
 
 - name: MySQL | Ensure MySQL users are present
