@@ -30,7 +30,8 @@
   get_url:
     url: "{{ mysql_deb_repo }}"
     dest: /usr/src
-    validate_certs: "no"
+    validate_certs: false
+    http_agent: null
 
 - name: MySQL | Install MySQL repo deb
   apt:
