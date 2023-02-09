@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 ## Unrealeased
+
+
+## [4.5.1](https://github.com/idealista/mysql_role/tree/4.5.1)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.1...4.5.2)
 ### Fixed
 - *[#91](https://github.com/idealista/mysql_role/issues/91) defaulted http_agent parameter to null when downloading MySQL config deb* @cardiente
 
