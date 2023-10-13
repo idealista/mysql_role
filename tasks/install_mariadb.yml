@@ -13,7 +13,7 @@
   apt:
     pkg: "{{ mysql_required_libs }}"
     state: present
-    update_cache: yes
+    update_cache: true
 
 - name: MySQL | Add Repo Key
   apt_key:
