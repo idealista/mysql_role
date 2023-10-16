@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 ## Unrealeased
 
+## [4.5.3](https://github.com/idealista/mysql_role/tree/4.5.3)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.2...4.5.3)
+### Fixed
+- *[#94](https://github.com/idealista/mysql_role/issues/94) update cache when installing dependencies* @ablopez
+
 
 ## [4.5.2](https://github.com/idealista/mysql_role/tree/4.5.2)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.1...4.5.2)

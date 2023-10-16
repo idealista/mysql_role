@@ -17,6 +17,7 @@
   apt:
     pkg: "{{ mysql_required_libs }}"
     state: present
+    update_cache: true
 
 - name: MySQL | Set MySQL server version
   debconf:
