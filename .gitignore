@@ -5,3 +5,4 @@ tests/__pycache__
 .vagrant
 .cache
 settings.json
+.idea
