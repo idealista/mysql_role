@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 ## Unrealeased
+
+## [4.5.4](https://github.com/idealista/mysql_role/tree/4.5.4)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.3...4.5.4)
 ### Removed
 - *[#94](https://github.com/idealista/mysql_role/issues/97) Remove variable in "vars" to make the variable in "defauts" work* @xtianae7
 
