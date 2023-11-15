@@ -1,6 +1,4 @@
 ---
-mysql_required_libs:
-  - python3-mysqldb
 
 mysql_packages:
   - mysql-common
