@@ -14,8 +14,6 @@ platforms:
     privileged: true
     capabilities:
       - SYS_ADMIN
-    volumes:
-      - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
     tmpfs:
       - /tmp
       - /run
