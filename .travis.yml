@@ -1,26 +1,45 @@
 ---
-matrix:
-  include:
-    - os: linux
-      arch: amd64
-      dist: focal
-      language: python
-      python: "3.9"
-    - os: linux
-      arch: arm64
-      dist: focal
-      language: python
-      python: "3.9"
+language: python
+python: "3.9"
 sudo: required
+
 services:
   - docker
+
 install:
   - pip install -I pipenv
   - pipenv sync
-env:
-  jobs:
-    - MOLECULE_DISTRO=debian:buster-slim
-    - MOLECULE_DISTRO=debian:bullseye-slim
+
+jobs:
+  include:
+    # AMD64 - Debian Buster
+    - name: "AMD64 - Debian Buster"
+      os: linux
+      arch: amd64
+      dist: focal
+      env: MOLECULE_DISTRO=debian:buster-slim
+    
+    # AMD64 - Debian Bullseye
+    - name: "AMD64 - Debian Bullseye"
+      os: linux
+      arch: amd64
+      dist: focal
+      env: MOLECULE_DISTRO=debian:bullseye-slim
+    
+    # ARM64 - Debian Buster
+    - name: "ARM64 - Debian Buster"
+      os: linux
+      arch: arm64
+      dist: focal
+      env: MOLECULE_DISTRO=debian:buster-slim
+    
+    # ARM64 - Debian Bullseye
+    - name: "ARM64 - Debian Bullseye"
+      os: linux
+      arch: arm64
+      dist: focal
+      env: MOLECULE_DISTRO=debian:bullseye-slim
+
 script:
   - pipenv run molecule test --all
 
