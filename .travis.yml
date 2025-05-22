@@ -1,7 +1,16 @@
 ---
-dist: focal
-language: python
-python: "3.9"
+matrix:
+  include:
+    - os: linux
+      arch: amd64
+      dist: focal
+      language: python
+      python: "3.9"
+    - os: linux
+      arch: arm64
+      dist: focal
+      language: python
+      python: "3.9"
 sudo: required
 services:
   - docker
