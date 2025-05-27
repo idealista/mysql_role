@@ -1,6 +1,8 @@
 ---
 ## General
-mysql_flavour: mysql
+
+# Por esta lógica basada en la arquitectura:
+mysql_flavour: "{{ (ansible_architecture == 'aarch64') | ternary('mariadb', 'mysql') }}"
 # Alt option:
 # mysql_flavour: mariadb
 
