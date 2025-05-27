@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/) and [Keep a changelog](https://github.com/olivierlacan/keep-a-changelog).
 ## Unrealeased
 
+## [4.5.6](https://github.com/idealista/mysql_role/tree/4.5.6)
+[Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.5...4.5.6)
+### Fixed
+- *[#103](https://github.com/idealista/mysql_role/issues/103) support for arm64 arch @mperez
+
 ## [4.5.5](https://github.com/idealista/mysql_role/tree/4.5.5)
 [Full Changelog](https://github.com/idealista/mysql_role/compare/4.5.4...4.5.5)
 ### Fixed
