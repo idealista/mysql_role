@@ -1,159 +1,209 @@
-![Logo](https://raw.githubusercontent.com/idealista/mysql_role/master/logo.gif)
+# RDS Aurora Serverless Pulumi Project
 
-# MySQL Ansible role
+This Pulumi project deploys an AWS RDS Aurora Serverless v2 MySQL database cluster, replacing the previous Ansible role for MySQL installation.
 
-[![Build Status](https://travis-ci.org/idealista/mysql_role.png)](https://travis-ci.org/idealista/mysql_role)
-[![Ansible Galaxy](https://img.shields.io/badge/galaxy-idealista.mysql__role-B62682.svg)](https://galaxy.ansible.com/idealista/mysql_role)
+## Overview
 
-This ansible role installs an Oracle MySQL or MariaDB server in a debian environment.
+This project creates:
+- AWS RDS Aurora Serverless v2 MySQL cluster
+- VPC with public and private subnets (if not provided)
+- Security groups with MySQL access
+- DB subnet group for multi-AZ deployment
+- Parameter group for custom MySQL configurations
 
-- [Getting Started](#getting-started)
-	- [Prerequisities](#prerequisities)
-	- [Installing](#installing)
-- [Usage](#usage)
-- [Testing](#testing)
-- [Built With](#built-with)
-- [Versioning](#versioning)
-- [Authors](#authors)
-- [License](#license)
-- [Contributing](#contributing)
+## Prerequisites
 
-## Getting Started
+- [Pulumi CLI](https://www.pulumi.com/docs/get-started/install/) installed
+- [AWS CLI](https://aws.amazon.com/cli/) configured with appropriate credentials
+- Python 3.7+ installed
 
-These instructions will get you a copy of the role for your Ansible playbook. Once launched, it will install an [MySQL Database](https://www.mysql.com/) or [MariaDB server](https://mariadb.org/) in a Debian system.
+## Installation
 
-### Prerequisities
-
-Ansible >= 2.9 version installed.
-Inventory destination should be a Debian environment.
-
-For testing purposes, [Molecule](https://molecule.readthedocs.io/) with Docker as driver and [Goss](https://goss.rocks/) as verifier.
-
-### Installing
-
-Create or add to your roles dependency file (e.g requirements.yml):
-
-```
-- src: idealista.mysql_role
-  version: 4.5.0
-  name: mysql
+1. Install Python dependencies:
+```bash
+pip install -r requirements.txt
 ```
 
-Install the role with ansible-galaxy command:
-
+2. Configure your AWS credentials:
+```bash
+aws configure
 ```
-ansible-galaxy install -p roles -r requirements.yml -f
+
+3. Initialize Pulumi stack:
+```bash
+pulumi stack init dev
 ```
 
-Use in a playbook:
+## Configuration
 
+The project supports the following configuration options:
+
+### Required Configuration
+- `master_password`: Master password for the database (default: "changeme123!")
+
+### Optional Configuration
+- `db_name`: Database name (default: "mysql")
+- `master_username`: Master username (default: "root")
+- `environment`: Environment tag (default: "dev")
+- `min_capacity`: Minimum Aurora Serverless capacity (default: 0.5)
+- `max_capacity`: Maximum Aurora Serverless capacity (default: 1.0)
+- `vpc_id`: Existing VPC ID (if not provided, creates new VPC)
+- `vpc_cidr`: CIDR block for new VPC (default: "10.0.0.0/16")
+- `allowed_cidr_blocks`: CIDR blocks allowed to access the database
+- `backup_retention_period`: Backup retention in days (default: 7)
+- `deletion_protection`: Enable deletion protection (default: false)
+- `skip_final_snapshot`: Skip final snapshot on deletion (default: true)
+
+### Setting Configuration
+
+```bash
+# Set required password
+pulumi config set rds-aurora-serverless:master_password "your-secure-password" --secret
+
+# Set optional configurations
+pulumi config set rds-aurora-serverless:environment "production"
+pulumi config set rds-aurora-serverless:min_capacity 1.0
+pulumi config set rds-aurora-serverless:max_capacity 4.0
+pulumi config set rds-aurora-serverless:deletion_protection true
 ```
----
-- hosts: someserver
-  roles:
-    - role: mysql
+
+## Deployment
+
+1. Preview the deployment:
+```bash
+pulumi preview
+```
+
+2. Deploy the infrastructure:
+```bash
+pulumi up
+```
+
+3. View the outputs:
+```bash
+pulumi stack output
 ```
 
 ## Usage
 
-
-Installation tasks follows the install guide: https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
-
-Look to the [defaults](defaults/main.yml) properties file to see the possible configuration properties.
-
-Set at least mysql_root_user and mysql_root_password:
-
-```yaml
-mysql_root_user: mysql         # Change mysql root user
-mysql_root_password: secret    # Change mysql root password
-```
-
-Add any number of databases and create users with privs on them
-
-```yaml
-mysql_databases:
-   - name: example_DB
-     encoding: utf8
-   - name: anotherExample_DB
-
-mysql_users:
-   - name: admin_user
-     host: 127.0.0.1
-     password: secret
-     priv: [ *.*:USAGE ]
-   - name: example_user
-     host: *
-     password: secret
-     priv: [ example_DB.*:ALL ]
-```
-
-### Selecting a major release version
-
-Major releases of MySQL can be selected using `mysql_server_version`. You can see the available options in the MySQL Debian mirror.
-
-## Testing
-
-```
-$ pipenv sync
-$ pipenv run molecule test --all
-```
-
-To check the installation, example with Oracle's MySQL implementation:
+After deployment, you can connect to your Aurora Serverless cluster using the provided endpoints:
 
 ```bash
-$ pipenv run molecule converge --scenario-name=mysql
-$ pipenv run molecule login --scenario-name=mysql
-
-root@mysql:/# mysql -u root -ptesting
-
-mysql> show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| information_schema |
-| mysql              |
-| test01             |
-| performance_schema |
-+--------------------+
-4 rows in set (0.00 sec)
+# Get connection information
+pulumi stack output cluster_endpoint
+pulumi stack output cluster_port
+pulumi stack output master_username
 ```
 
- ## Known Issues
-  There is a problem while trying to remount /run using the role. If you need to assign a new size for mysql use this in your playbook
-```yaml
-- name: MySQL | Remounting /run
-  shell: mount -t tmpfs tmpfs /run -o remount,size={{ mysql_remount_run_partition_size }}
-  changed_when: false
-  tags:
-    skip_ansible_lint
-  when: mysql_remount_run
+### Connecting with MySQL client
+
+```bash
+mysql -h $(pulumi stack output cluster_endpoint) \
+      -P $(pulumi stack output cluster_port) \
+      -u $(pulumi stack output master_username) \
+      -p$(pulumi config get rds-aurora-serverless:master_password) \
+      $(pulumi stack output database_name)
 ```
 
+## Migration from Ansible Role
 
-## Built With
+This Pulumi project replaces the previous Ansible MySQL role with the following improvements:
 
-![Ansible](https://img.shields.io/badge/ansible-5.2.0-green.svg)
-![Molecule](https://img.shields.io/badge/molecule-3.4.2-green.svg)
-![Goss](https://img.shields.io/badge/goss-0.3.16-green.svg)
+### Original Ansible Role Features → Pulumi Equivalent
 
-## Versioning
+| Ansible Role Feature | Pulumi Implementation |
+|---------------------|----------------------|
+| MySQL/MariaDB installation | RDS Aurora Serverless v2 MySQL |
+| Local database configuration | Cloud-native managed service |
+| User management | IAM and database users (can be extended) |
+| Database creation | Automated through RDS |
+| Service management | Fully managed by AWS |
+| Configuration templates | Parameter groups |
+| Security configuration | VPC security groups |
 
-For the versions available, see the [tags on this repository](https://github.com/idealista/mysql_role/tags).
+### Benefits of Aurora Serverless
 
-Additionaly you can see what change in each version in the [CHANGELOG.md](CHANGELOG.md) file.
+- **Automatic scaling**: Scales compute capacity based on demand
+- **Pay-per-use**: Only pay for resources when database is active
+- **High availability**: Multi-AZ deployment with automatic failover
+- **Managed backups**: Automated backups and point-in-time recovery
+- **Security**: Encryption at rest and in transit
+- **Monitoring**: CloudWatch integration for metrics and logs
 
-## Authors
+## Outputs
 
-* **Idealista** - *Work with* - [idealista](https://github.com/idealista)
+The stack provides the following outputs:
 
-See also the list of [contributors](https://github.com/idealista/mysql_role/contributors) who participated in this project.
+- `cluster_endpoint`: Primary endpoint for write operations
+- `cluster_reader_endpoint`: Reader endpoint for read operations
+- `cluster_port`: Database port (3306)
+- `cluster_id`: Aurora cluster identifier
+- `cluster_arn`: Aurora cluster ARN
+- `database_name`: Default database name
+- `master_username`: Master username
+- `security_group_id`: Security group ID
+- `vpc_id`: VPC ID
+- `subnet_group_name`: DB subnet group name
+- `connection_string`: Full connection string
 
-## License
+## Cleanup
 
-![Apache 2.0 License](https://img.shields.io/hexpm/l/plug.svg)
+To destroy the infrastructure:
 
-This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) license - see the [LICENSE](LICENSE) file for details.
+```bash
+pulumi destroy
+```
+
+## Security Considerations
+
+1. **Password Management**: Use Pulumi secrets for sensitive data:
+   ```bash
+   pulumi config set rds-aurora-serverless:master_password "password" --secret
+   ```
+
+2. **Network Access**: Restrict `allowed_cidr_blocks` to specific IP ranges:
+   ```bash
+   pulumi config set rds-aurora-serverless:allowed_cidr_blocks '["10.0.0.0/8","172.16.0.0/12"]'
+   ```
+
+3. **Deletion Protection**: Enable for production environments:
+   ```bash
+   pulumi config set rds-aurora-serverless:deletion_protection true
+   ```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **VPC Limits**: Ensure you have available VPCs in your region
+2. **Subnet Availability**: Verify subnets exist in multiple AZs
+3. **IAM Permissions**: Ensure your AWS credentials have RDS permissions
+4. **Region Support**: Aurora Serverless v2 is not available in all regions
+
+### Useful Commands
+
+```bash
+# Check stack status
+pulumi stack
+
+# View configuration
+pulumi config
+
+# Export stack state
+pulumi stack export
+
+# View logs
+pulumi logs
+```
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test the deployment
+5. Submit a pull request
+
+## License
+
+This project maintains the same Apache 2.0 license as the original Ansible role.

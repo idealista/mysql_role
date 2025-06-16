@@ -1,0 +1,3 @@
+name: aurora-basic-example
+runtime: python
+description: Basic example of Aurora Serverless deployment

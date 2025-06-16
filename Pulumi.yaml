@@ -1,0 +1,8 @@
+name: rds-aurora-serverless
+runtime: python
+description: A Pulumi project to deploy RDS Aurora Serverless database replacing MySQL Ansible role
+template:
+  config:
+    aws:region:
+      description: The AWS region to deploy to
+      default: us-east-1

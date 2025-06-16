@@ -1,0 +1,13 @@
+config:
+  aws:region: us-east-1
+  rds-aurora-serverless:db_name: mysql
+  rds-aurora-serverless:master_username: root
+  rds-aurora-serverless:master_password: changeme123!
+  rds-aurora-serverless:environment: dev
+  rds-aurora-serverless:min_capacity: 0.5
+  rds-aurora-serverless:max_capacity: 1.0
+  rds-aurora-serverless:deletion_protection: false
+  rds-aurora-serverless:skip_final_snapshot: true
+  rds-aurora-serverless:backup_retention_period: 7
+  rds-aurora-serverless:allowed_cidr_blocks:
+    - "0.0.0.0/0"
